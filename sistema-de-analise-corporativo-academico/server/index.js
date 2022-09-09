@@ -1,31 +1,31 @@
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const mysql = require ("mysql2");
+const mysql = require ("mysql");
+const cors = require("cors");
 
-function execMysqlQuery(sqlQry, res){
-    const connection = mysql.createConnection({
-        host: "localhost",
-        port: "3306",
-        user: "root",
-        password: "",
-        database: "tcc"
-    });
+app.use(express.json());
+app.use(cors());
 
-    connection.query(sqlQry, (error, results, fields) =>{
-        if(error){
-            res.json(error);
+const db = mysql.createConnection({
+    user:"root",
+    host:"localhost",
+    password:"",
+    database:"tcc"
+})
+
+app.post("/api/login" , (req, res)=>{
+    const user = req.body.user;
+    const password = req.body.password;
+    db.query("SELECT * FROM login WHERE login = ? AND senha = ?", [user, password], (err, result) =>{
+        if(err){
+            res.send({msg: err});
+        } if(result.length > 0){
+            res.send({msg: "Logado com sucesso"});
+        } else{
+            res.send({msg: "Usuário ou senha incorretos."});
         }
-        else {
-            res.json(results);
-        }
-        connection.end();
     })
-}
-
-
-app.get("/" , (req, res)=>{
-    execMysqlQuery("SELECT * FROM login", res);
 })
 
 app.listen(PORT, () =>{

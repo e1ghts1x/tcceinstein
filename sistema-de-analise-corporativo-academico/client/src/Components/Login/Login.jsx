@@ -1,82 +1,62 @@
 import React from "react";
-import Login from "./Login.css"
+import "./Login.css"
 import image from "../../res/logo.png"
-//import axios from "axios";
-import {ErrorMessage, Field, Formik} from "formik";
+import Axios from "axios";
+import { useState } from "react";
+import { Formik, useFormik } from "formik";
+import * as yup from "yup";
 
+export default function () {
 
-export default function(){
-    /*const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-
-    function validaForm(){
-        return user.length > 0 && password.length > 0;
-    }
-
-    function handleEnvio(evento){
-        evento.preventDefault();
-    }*/
-
-    function mostrarSenha(){
+    const formik = useFormik({
+        initialValues: {
+            user: "",
+            password: "",
+        },
+        validationSchema: yup.object({
+            user: yup.string().required("O campo usuário não pode ser vazio."),
+            password: yup.string().required("O campo senha não pode ser vazio.")
+        }),
+        onSubmit: (values) => {
+            Axios.post("http://192.168.0.235:3001/api/login", {
+                user: values.user,
+                password: values.password,
+            }).then((response) => {
+                alert(response.data.msg);
+            });
+        }
+    })
+    
+    function mostrarSenha() {
         var senha = document.getElementById("password");
-        if (senha.type === "password"){
+        if (senha.type === "password") {
             senha.type = "text";
         }
-        else{
+        else {
             senha.type = "password";
         }
     }
-    
-    return(
+
+    return (
         <div className="formulario">
-            <Formik 
-                initialValues={{user: '', password: ''}}
-                validate={values => {
-                    const errors = {};
-                    if (!values.user){
-                        errors.user = "O usuário não pode ser vazio.";
-                    } 
-                    if (!values.password){
-                        errors.password = "A senha não pode ser vazia."
-                    }
-                    return errors;
-                }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() =>{
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
-            >
-                {({ isSubmitting })=> (
-                    <form>
-                        <img src={image} alt="Logo"></img>
-                        <h2>Login</h2>
-                        <label for="user">Usuário: </label>
-                        <Field type="text" name="user" />
-                        <ErrorMessage name="user" component="div" className="error-message"/>
-                        <label for="user">Senha: </label>
-                        <Field type="password" name="password" id="password"/>
-                        <ErrorMessage name="password" component="div" className="error-message"/>
-                        <button type="submit" disabled={isSubmitting}>Enviar</button>
-                    </form>
-                )}
+            <Formik>
+                <form onSubmit={formik.handleSubmit}>
+                    <img src={image} alt="Logo"></img>
+                    <h2>Login</h2>
+                    <label htmlFor="user">Usuário: </label>
+                    <input type="text" name="user" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.user} />
+                    {formik.touched.user && formik.errors.user ? (
+                        <div className="error-message">{formik.errors.user}</div>
+                    ) : null}
+                    <label htmlFor="user">Senha: </label>
+                    <input type="password" name="password" id="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password} />
+                    {formik.touched.password && formik.errors.password ? (
+                        <div className="error-message">{formik.errors.password}</div>
+                    ) : null}
+                    <button type="submit">Entrar</button>
+                </form>
             </Formik>
             <button onClick={mostrarSenha}>Exibir Senha</button>
         </div>
     )
 }
-
-        /*<div className="formulario">
-            <form onSubmit={handleEnvio}>
-                <img src={image} alt="Logo"></img>
-                <h2>Login</h2>
-                <label forhtml="user">Usuário: </label><br></br>
-                <input autoFocus value={user} onChange={(e) => setUser(e.target.value)} id="user" name="user"></input><br></br>
-                <label forHtml="password">Senha: </label><br></br>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="senha" name="senha"></input><br></br>
-                <button type="submit" /*value={}>Enviar</button>
-            </form>
-            <button onClick={mostrarSenha}>Exibir Senha</button>
-        </div>*/

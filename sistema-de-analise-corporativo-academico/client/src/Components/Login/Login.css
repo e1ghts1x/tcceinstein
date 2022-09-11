@@ -2,8 +2,8 @@
   --cinzaEscuro: #E8E8E8;
   --branco: #FFFFFF;
   --preto: black;
-  --cor-destaque: #FFE08F;
-  --cor-realce: #EEAD2D;
+  --cor-destaque: #a83832; /* #FFE08F */
+  --cor-realce: #e8362c; /* #EEAD2D*/
   /*/ #FFC52F */
 }
 
@@ -39,8 +39,9 @@ body{
 .formulario img{
   margin: auto;
   display: block;
-  width: 25vh;
-  min-width: 25vh;
+  width: 35vh;
+  height: 10vh;
+  min-width: 35vh;
 }
 
 .formulario input{

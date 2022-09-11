@@ -1,8 +1,7 @@
 import React from "react";
 import "./Login.css"
-import image from "../../res/logo.png"
+import image from "../../res/saci1.png"
 import Axios from "axios";
-import { useState } from "react";
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
@@ -18,7 +17,7 @@ export default function () {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post("http://192.168.0.235:3001/api/login", {
+            Axios.post("http://localhost:3001/api/login", {
                 user: values.user,
                 password: values.password,
             }).then((response) => {

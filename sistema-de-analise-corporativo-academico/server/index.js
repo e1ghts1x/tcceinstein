@@ -29,5 +29,5 @@ app.post("/api/login" , (req, res)=>{
 })
 
 app.listen(PORT, () =>{
-    console.log(`Server em ${PORT}`);
+    console.log(`Server em https://localhost:${PORT}`);
 });

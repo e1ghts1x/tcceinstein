@@ -1,10 +1,11 @@
+![saci-white](https://user-images.githubusercontent.com/66132515/189540906-111789a1-8a41-4980-a737-0b228825ce41.png)
+
 # Tcc Análise e desenvolvimento de sistemas das Faculdades Integradas Einstein de Ensino
 
 ## Tecnologias Utilizadas
  - [x] React
- - [x] Html
- - [x] Css
- - [x] Javascript
+ - [x] NodeJS
+ - [x] MySQL
  - [x] PowerBI
  
 ## Processos

@@ -1,0 +1,12 @@
+:root{
+    --cinzaClaro: #E8E8E8;
+    --branco: #FFFFFF;
+    --preto: black;
+    --cor-destaque: #a83832; /* #FFE08F */
+    --cor-realce: #e8362c; /* #EEAD2D*/
+    /*/ #FFC52F */
+}
+
+body {
+    background-color: var(--cinzaClaro);
+}

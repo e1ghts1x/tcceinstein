@@ -1,11 +1,11 @@
 import React from "react";
-import "./Login.css"
-import image from "../../res/saci1.png"
+import "./LoginAdmin.css"
 import Axios from "axios";
+import image from "../../res/saci1.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-export default function () {
+export default function() {
 
     const formik = useFormik({
         initialValues: {

@@ -15,11 +15,6 @@
 *{
   font-family: 'Roboto';
 }
-
-body{
-  background-color: var(--cinzaEscuro);
-}
-
 .formulario{
   padding-top: 100px;
   padding-bottom: 100px;
@@ -39,9 +34,9 @@ body{
 .formulario img{
   margin: auto;
   display: block;
-  width: 35vh;
+  width: 80%;
   height: 10vh;
-  min-width: 35vh;
+  min-width: 80%;
 }
 
 .formulario input{

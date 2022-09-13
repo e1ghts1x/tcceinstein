@@ -21,7 +21,7 @@ app.post("/api/login" , (req, res)=>{
         if(err){
             res.send({msg: err});
         } if(result.length > 0){
-            res.send({msg: "Logado com sucesso"});
+            res.send({msg: "Logado com sucesso."});
         } else{
             res.send({msg: "Usuário ou senha incorretos."});
         }
@@ -29,5 +29,5 @@ app.post("/api/login" , (req, res)=>{
 })
 
 app.listen(PORT, () =>{
-    console.log(`Server em https://localhost:${PORT}`);
+    console.log(`Server em http://localhost:${PORT}`);
 });

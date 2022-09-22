@@ -7,14 +7,11 @@
   /*/ #FFC52F */
 }
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('../../fonts/Roboto-Regular.ttf') format('truetype');
+.admin-login-page{
+  height: 100vh;
+  background-color: var(--cinzaEscuro);
 }
 
-*{
-  font-family: 'Roboto';
-}
 .formulario{
   padding-top: 100px;
   padding-bottom: 100px;

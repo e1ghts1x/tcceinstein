@@ -5,7 +5,7 @@ import image from "../../res/saci1.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-export default function() {
+export default () => {
 
     const formik = useFormik({
         initialValues: {
@@ -25,7 +25,7 @@ export default function() {
             });
         }
     })
-    
+
     function mostrarSenha() {
         var senha = document.getElementById("password");
         if (senha.type === "password") {
@@ -37,25 +37,27 @@ export default function() {
     }
 
     return (
-        <div className="formulario">
-            <Formik>
-                <form onSubmit={formik.handleSubmit}>
-                    <img src={image} alt="Logo"></img>
-                    <h2>Login</h2>
-                    <label htmlFor="user">Usuário: </label>
-                    <input type="text" name="user" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.user} />
-                    {formik.touched.user && formik.errors.user ? (
-                        <div className="error-message">{formik.errors.user}</div>
-                    ) : null}
-                    <label htmlFor="user">Senha: </label>
-                    <input type="password" name="password" id="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password} />
-                    {formik.touched.password && formik.errors.password ? (
-                        <div className="error-message">{formik.errors.password}</div>
-                    ) : null}
-                    <button type="submit">Entrar</button>
-                </form>
-            </Formik>
-            <button onClick={mostrarSenha}>Exibir Senha</button>
+        <div className="admin-login-page">
+            <div className="formulario">
+                <Formik>
+                    <form onSubmit={formik.handleSubmit}>
+                        <img src={image} alt="Logo"></img>
+                        <h2>Login</h2>
+                        <label htmlFor="user">Usuário: </label>
+                        <input type="text" name="user" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.user} />
+                        {formik.touched.user && formik.errors.user ? (
+                            <div className="error-message">{formik.errors.user}</div>
+                        ) : null}
+                        <label htmlFor="user">Senha: </label>
+                        <input type="password" name="password" id="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password} />
+                        {formik.touched.password && formik.errors.password ? (
+                            <div className="error-message">{formik.errors.password}</div>
+                        ) : null}
+                        <button type="submit">Entrar</button>
+                    </form>
+                </Formik>
+                <button onClick={mostrarSenha}>Exibir Senha</button>
+            </div>
         </div>
     )
 }

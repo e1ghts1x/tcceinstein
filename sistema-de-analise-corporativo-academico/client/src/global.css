@@ -1,12 +1,21 @@
-:root{
+/*:root{
     --cinzaClaro: #E8E8E8;
     --branco: #FFFFFF;
     --preto: black;
-    --cor-destaque: #a83832; /* #FFE08F */
+    --cor-destaque: #a83832; /* #FFE08F 
     --cor-realce: #e8362c; /* #EEAD2D*/
-    /*/ #FFC52F */
+/*/ #FFC52F
+}*/
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Regular.ttf") format("truetype");
 }
 
 body {
-    background-color: var(--cinzaClaro);
+    margin: auto;
+}
+
+* {
+  font-family: "Roboto";
 }

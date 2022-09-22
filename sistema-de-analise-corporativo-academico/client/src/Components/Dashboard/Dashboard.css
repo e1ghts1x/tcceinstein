@@ -24,7 +24,7 @@
 }
 
 .sidebar a{
-    padding: 8px 8px 8px 32px;
+    padding: 10px 10px 10px 32px;
     text-decoration: none;
     width: 80%;
     float: right;
@@ -33,14 +33,14 @@
     font-size: 20px;
     color: var(--white);
     display: block;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .sidebar a:hover{
     color: #a83832;
     background-color: var(--cinzaEscuro);
-    transition: 0.5s;
     border-bottom: 1px solid var(--corDestaque);
+    transition: 0.5s;
 }
 
 .sidebar a:focus{

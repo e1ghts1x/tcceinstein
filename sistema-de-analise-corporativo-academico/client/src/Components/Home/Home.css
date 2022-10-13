@@ -1,0 +1,43 @@
+:root{
+    --navBarBackgroundColor: #404040;
+    --white: white;
+    --cinzaClaro: #E8E8E8;
+    --corDestaque: #a83832;
+}
+
+.navbar{
+    position: absolute;
+    background-color: var(--navBarBackgroundColor);
+    width: 100%;
+    margin: 0px;
+}
+
+.navbar img{
+    width: 22vh;
+    overflow: hidden;
+}
+
+.navbar a{
+    margin-top: 3vh;
+    margin-right: 2vh ;
+    float: right;
+    font-size: 20px;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white);
+    padding-right: 2vh;
+    margin-bottom: 3vh;
+}
+
+.navbar a:hover{
+    color: var(--corDestaque);
+    transition: 0.5s;
+}
+
+.contato{
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -70%);
+}

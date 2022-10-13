@@ -1,24 +1,19 @@
 import React from "react";
-import { Formik, useFormik } from "formik";
-import * as yup from "yup";
+import image from "../../res/saci-white.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import "./Home.css"
 
-export default function(){
-    
-    const formik = useFormik({
-        initialValues:{
-            user: "",
-            password: "",
-        },
-        validationSchema: yup.object({
-            user: yup.string().required("O campo usuário não pode ser vazio."),
-            password: yup.string().required("O campo senha não pode ser vazio.")
-        }),
-        onSubmit: (values) => {}
-    })
-
-    return(
-        <div>
-            <h1>Login</h1>
+export default function () {
+    return (
+        <div className="home">
+            <div id="navbar" className="navbar">
+                <img src={image} alt="logo"/>
+                <a href="#login" id="first"><FontAwesomeIcon icon={faUser} /> Login</a>
+            </div>
+            <div className="contato">
+            </div>
         </div>
     )
 }

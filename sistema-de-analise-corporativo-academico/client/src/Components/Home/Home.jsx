@@ -12,7 +12,9 @@ export default function () {
                 <img src={image} alt="logo"/>
                 <a href="#login" id="first"><FontAwesomeIcon icon={faUser} /> Login</a>
             </div>
-            <div className="contato">
+            <div className="welcome">
+                <h1>Bem-vindo ao SACI</h1>
+                <h6>Sistema de análise corporativo e institucional</h6>
             </div>
         </div>
     )

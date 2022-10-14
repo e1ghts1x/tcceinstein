@@ -5,6 +5,12 @@
     --corDestaque: #a83832;
 }
 
+body{
+    background: url("https://images4.alphacoders.com/125/1254672.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .navbar{
     position: absolute;
     background-color: var(--navBarBackgroundColor);
@@ -35,9 +41,10 @@
     transition: 0.5s;
 }
 
-.contato{
+.welcome{
     position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -70%);
+    color: white;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -1,5 +1,7 @@
 :root{
-    --navBarBackgroundColor: #404040;
+    --BackgroundHome: #201b2c;
+    --BackgroundCard: #2f2841;
+    --BackgorundInput: #514869;
     --white: white;
     --cinzaClaro: #E8E8E8;
     --corDestaque: #a83832;
@@ -8,7 +10,7 @@
 .home{
     width: 100vw;
     height: 100vh;
-    background: #201b2c;
+    background: var(--BackgroundHome);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,41 +26,102 @@
 }
 
 .left img{
-    width: 80%;
+    width: 100%;
 }
 
 .right{
-    width: 50vw;
+    width: 60vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.right h2{
+.right h1{
     margin: 0px;
     padding: 0px;
     padding-bottom: 10px;
-    color: white;
-}
-
-.right .card input{
-    margin-bottom: 10px;
-    overflow: hidden;
-    background: none;
-    border: none
-    border-bottom: 1px solid white;
-    color: white;
+    color: var(--white);
 }
 
 .card{
-    width: 60%;
+    width: 50%;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 30px 35px ;
-    background: #2f2841;
+    background: var(--BackgroundCard);
     border-radius: 20px;
     box-shadow: 0px 10px 40px #00000056;
+}
+
+.right .card input{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: var(--BackgorundInput);
+    color: var(--white);
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: 0.5s;
+}
+
+.right .card input:focus{
+    border: 1px solid var(--corDestaque);
+    transition: 0.5s;
+}
+
+.right .card form{
+    width: 100%;
+}
+
+.right .card button{
+    width: 100%;
+    padding: 16px 0px;
+    border: none;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 800;
+    letter-spacing: 3px;
+    color: black;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.right .card button:hover{
+    color: white;
+    background-color: var(--corDestaque);
+    transition: 0.5s;
+}
+
+.error-message{
+    color: red;
+    font-style: italic;
+    font-size: 20px;
+}
+
+
+@media only screen and (max-width: 600px){
+    .home{
+        flex-direction: column;
+    }
+    .left{
+        width: 100%;
+        height: auto;
+    }
+    .left img{
+        width: 50vw;
+    }
+    .card{
+        width: 100%;
+        height: 60%;
+    }
 }

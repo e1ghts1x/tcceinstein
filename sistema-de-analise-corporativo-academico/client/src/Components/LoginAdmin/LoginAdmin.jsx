@@ -17,7 +17,7 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post("http://localhost:3001/api/login", {
+            Axios.post("http://localhost:3001/api/admin", {
                 user: values.user,
                 password: values.password,
             }).then((response) => {

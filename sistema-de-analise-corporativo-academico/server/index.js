@@ -14,6 +14,20 @@ const db = mysql.createConnection({
     database:"tcc"
 })
 
+app.post("/api/admin" , (req, res)=>{
+    const user = req.body.user;
+    const password = req.body.password;
+    db.query("SELECT * FROM admins WHERE admins = ? AND senha = ?", [user, password], (err, result) =>{
+        if(err){
+            res.send({msg: err});
+        } if(result.length > 0){
+            res.send({msg: "Logado com sucesso."});
+        } else{
+            res.send({msg: "Usuário ou senha incorretos."});
+        }
+    })
+})
+
 app.post("/api/login" , (req, res)=>{
     const user = req.body.user;
     const password = req.body.password;

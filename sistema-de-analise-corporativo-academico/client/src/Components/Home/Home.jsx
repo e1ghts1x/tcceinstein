@@ -8,13 +8,16 @@ import "./Home.css"
 export default function () {
     return (
         <div className="home">
-            <div id="navbar" className="navbar">
-                <img src={image} alt="logo"/>
-                <a href="#login" id="first"><FontAwesomeIcon icon={faUser} /> Login</a>
+            <div className="left">
+                <img src={image} alt="Logo"></img>
             </div>
-            <div className="welcome">
-                <h1>Bem-vindo ao SACI</h1>
-                <h6>Sistema de análise corporativo e institucional</h6>
+            <div className="right">
+                <div className="card">
+                    <h2>Login: </h2>
+                    <input placeholder="Usuário"></input>
+                    <input placeholder="Senha"></input>
+                    <button>Login</button>
+                </div>
             </div>
         </div>
     )

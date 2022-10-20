@@ -5,46 +5,60 @@
     --corDestaque: #a83832;
 }
 
-body{
-    background: url("https://images4.alphacoders.com/125/1254672.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+.home{
+    width: 100vw;
+    height: 100vh;
+    background: #201b2c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.navbar{
-    position: absolute;
-    background-color: var(--navBarBackgroundColor);
-    width: 100%;
+.left{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left img{
+    width: 80%;
+}
+
+.right{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right h2{
     margin: 0px;
-}
-
-.navbar img{
-    width: 22vh;
-    overflow: hidden;
-}
-
-.navbar a{
-    margin-top: 3vh;
-    margin-right: 2vh ;
-    float: right;
-    font-size: 20px;
-    overflow: hidden;
-    text-align: center;
-    text-decoration: none;
-    color: var(--white);
-    padding-right: 2vh;
-    margin-bottom: 3vh;
-}
-
-.navbar a:hover{
-    color: var(--corDestaque);
-    transition: 0.5s;
-}
-
-.welcome{
-    position: absolute;
+    padding: 0px;
+    padding-bottom: 10px;
     color: white;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+.right .card input{
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: none;
+    border: none
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.card{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px ;
+    background: #2f2841;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
 }

@@ -45,7 +45,8 @@ export default function () {
                 <div className="card">
                     <Formik>
                         <form onSubmit={formik.handleSubmit}>
-                            <h1>Login: </h1>
+                            <h2>Bem-vindo ao sistema de avaliação NPS</h2>
+                            <h2>Login: </h2>
                             <input placeholder="Usuário" name="user" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.user} />
                             {formik.touched.user && formik.errors.user ? (
                                 <div className="error-message">{formik.errors.user}</div>
@@ -57,7 +58,7 @@ export default function () {
                             <button type="submit">Login</button>
                         </form>
                     </Formik>
-                    <button onClick={mostrarSenha}>Mostrar Senha</button>
+                    <button onClick={mostrarSenha}>Exibir Senha</button>
                 </div>
             </div>
         </div>

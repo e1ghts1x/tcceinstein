@@ -21,6 +21,8 @@ export default () => {
                 user: values.user,
                 password: values.password,
             }).then((response) => {
+                localStorage.setItem("@admin", true);
+                window.location.reload();
                 alert(response.data.msg);
             });
         }

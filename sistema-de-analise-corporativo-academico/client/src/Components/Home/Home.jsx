@@ -21,7 +21,8 @@ export default function () {
                 user: values.user,
                 password: values.password,
             }).then((response) => {
-                alert(response.data.msg);
+                localStorage.setItem("@user", JSON.stringify(response.config.data));
+                window.location.reload();
             });
         }
     })

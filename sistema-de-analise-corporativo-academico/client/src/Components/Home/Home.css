@@ -105,7 +105,7 @@
 
 
 @media only screen and (max-width: 600px){
-    .form{
+    .home{
         flex-direction: column;
     }
     .left{
@@ -114,6 +114,9 @@
     }
     .left img{
         width: 50vw;
+    }
+    .right .card h2{
+        font-size: 13pt;
     }
     .card{
         width: 500px;

@@ -17,12 +17,13 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post("http://localhost:3001/api/admin", {
-                user: values.user,
+            Axios.post("http://localhost:3001/api/login", {
+                username: values.user,
                 password: values.password,
-            }).then((response) => {
-                localStorage.setItem("@admin", JSON.stringify(response.config.data));
-                window.location.reload();
+            }).then((res) => {
+                localStorage.setItem('token', res.data.token)
+                Axios.defaults.headers.common['Auth'] = 'Bearer'+ res.data.token
+                
             });
         }
     })

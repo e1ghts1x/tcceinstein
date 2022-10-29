@@ -10,6 +10,10 @@ app.use(cors());
 const router = require('./routes/router.js');
 app.use("/api", router);
 
+app.listen(PORT, () =>{
+    console.log(`Server em http://localhost:${PORT}`);
+});
+
 /*app.post("/api/admin" , (req, res)=>{
     const user = req.body.user;
     const password = req.body.password;
@@ -21,7 +25,3 @@ app.post("/api/login" , (req, res)=>{
     const password = req.body.password;
     console.log(user, password)
 })*/
-
-app.listen(PORT, () =>{
-    console.log(`Server em http://localhost:${PORT}`);
-});

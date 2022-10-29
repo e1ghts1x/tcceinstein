@@ -1,11 +1,13 @@
 import React from "react";
 import "./LoginAdmin.css"
 import Axios from "axios";
+import {useNavigate} from "react-router-dom"
 import image from "../../res/saci1.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
 export default () => {
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -21,9 +23,10 @@ export default () => {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
+                console.log(res)
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer'+ res.data.token
-                
+                navigate("/dashboard")
             });
         }
     })

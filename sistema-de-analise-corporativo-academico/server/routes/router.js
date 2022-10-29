@@ -1,11 +1,11 @@
 const router = require("express").Router();
-
+require('dotenv').config()
 const bcrypt = require("bcryptjs");
 const uuid = require("uuid");
 const jwt = require("jsonwebtoken");
 
 const db = require("../lib/db.js");
-const userMiddleware = require("../middleware/admins.js");
+const adminMiddleware = require("../middleware/admins.js");
 
 router.post('/login', (req, res, next) => {
   db.query(
@@ -19,7 +19,7 @@ router.post('/login', (req, res, next) => {
         }
         if (!result.length) {
           return res.status(401).send({
-            msg: 'Usuário ou senha incorretos'
+            msg: 'Usuário ou senha incorretos 1'
           });
         }
         bcrypt.compare(
@@ -28,15 +28,16 @@ router.post('/login', (req, res, next) => {
           (bErr, bResult) => {
             if (bErr) {
               return res.status(401).send({
-                msg: 'Usuário ou senha incorretos'
+                msg: 'Usuário ou senha incorretos 2'
               });
             }
             else if (bResult) {
               const token = jwt.sign({
                   username: result[0].username,
-                  userId: result[0].id
+                  userId: result[0].id,
+                  userPassword: result[0].password
                 },
-                '$carecrow', {
+                process.env.JWT_TOKEN, {
                   expiresIn: '7d'
                 }
               );
@@ -47,7 +48,7 @@ router.post('/login', (req, res, next) => {
               });
             }
             return res.status(401).send({
-              msg: 'Usuário ou senha incorretos'
+              msg: 'Usuário ou senha incorretos 3'
             });
           }
         );
@@ -55,8 +56,8 @@ router.post('/login', (req, res, next) => {
     );
   });
 
-router.get("/secret", userMiddleware.isLoggedIn, (req, res, next) => {
-    console.log(req.userData)
+router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
+  console.log(req.userData)
   res.send("Usuário logado.");
 }),
 

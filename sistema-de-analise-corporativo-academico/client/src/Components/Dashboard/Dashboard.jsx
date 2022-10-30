@@ -1,16 +1,30 @@
-import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartSimple } from '@fortawesome/free-solid-svg-icons'
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-import { faGear } from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from "react";
+import Axios from "axios";
 import "./Dashboard.css"
-import image from "../../res/saci-white.png"
 import Sidebar from "./Sidebar";
 
-export default function () {
+export default  (props) => {
+
+    const [resultado,  setResultado] = useState()
+    
+    const token = localStorage.getItem('token')
+    const config = {
+        headers:{
+            Authorization: "Bearer " + token
+        }
+    }
+    const handleTest = () => {
+        console.log("aaa")
+        Axios.get(`http://192.168.0.160:3001/api/dashboard`, config).then((res)=>{
+            setResultado(res.data)
+        })
+    }
+
+
     return (
         <div>
-            <Sidebar></Sidebar>
+           <button onClick={handleTest}>Testar</button>
+           <h1>{resultado}</h1>
         </div>
     )
 }

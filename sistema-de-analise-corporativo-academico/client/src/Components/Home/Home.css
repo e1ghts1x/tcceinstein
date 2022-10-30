@@ -114,6 +114,7 @@
     }
     .left img{
         width: 50vw;
+        margin-top: 20px;
     }
     .right .card h2{
         font-size: 13pt;

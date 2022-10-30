@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../lib/db.js");
 const adminMiddleware = require("../middleware/admins.js");
 
-router.post('/login', (req, res, next) => {
+router.post('/loginadmin', (req, res, next) => {
   db.query(
     `SELECT * FROM admins WHERE admins = ${db.escape(req.body.username)};`,
     (err, result) => {
@@ -38,7 +38,7 @@ router.post('/login', (req, res, next) => {
                   userPassword: result[0].password
                 },
                 process.env.JWT_TOKEN, {
-                  expiresIn: '7d'
+                  expiresIn: process.env.JWT_EXPIRES
                 }
               );
               return res.status(200).send({
@@ -55,6 +55,8 @@ router.post('/login', (req, res, next) => {
       }
     );
   });
+
+
 
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData)

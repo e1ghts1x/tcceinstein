@@ -60,6 +60,7 @@ export default function () {
                         </form>
                     </Formik>
                     <button onClick={mostrarSenha}>Exibir Senha</button>
+                    {/*todo*/}<a>Cadastrar-se</a>
                 </div>
             </div>
         </div>

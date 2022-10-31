@@ -21,7 +21,6 @@
 .sidebar img{
     width: 60%;
     position: relative;
-    left: 20%;
 }
 
 .sidebar a{
@@ -53,6 +52,6 @@
 
 @media screen and (max-width: 800px) {
     .sidebar {padding-top: 5%;}
-    .sidebar img {width: 60%;}
+    .sidebar img {width: 100%;}
     .sidebar a {font-size: 15px;}
   }

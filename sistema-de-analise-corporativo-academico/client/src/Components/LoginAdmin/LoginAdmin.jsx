@@ -19,7 +19,7 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post(`http://192.168.0.160:3001/api/loginadmin`, {
+            Axios.post(`http://localhost:3001/api/loginadmin`, {
                 username: values.user,
                 password: values.password,
             }).then((res) => {

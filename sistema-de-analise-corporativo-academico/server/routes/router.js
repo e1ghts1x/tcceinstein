@@ -57,7 +57,6 @@ router.post('/loginadmin', (req, res, next) => {
   });
 
 
-
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData)
   res.send("Usuário logado.");

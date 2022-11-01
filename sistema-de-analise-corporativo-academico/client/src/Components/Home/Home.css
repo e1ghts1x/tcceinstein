@@ -30,7 +30,7 @@
 }
 
 .right{
-    width: 60vw;
+    width: 80vw;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -103,6 +103,9 @@
     transition: 0.5s;
 }   
 
+.right .card a{
+    color: white;
+}
 
 @media only screen and (max-width: 600px){
     .home{

@@ -19,7 +19,7 @@ router.post('/loginadmin', (req, res, next) => {
         }
         if (!result.length) {
           return res.status(401).send({
-            msg: 'Usuário ou senha incorretos 1'
+            msg: 'Usuário ou senha incorretos'
           });
         }
         bcrypt.compare(
@@ -28,7 +28,7 @@ router.post('/loginadmin', (req, res, next) => {
           (bErr, bResult) => {
             if (bErr) {
               return res.status(401).send({
-                msg: 'Usuário ou senha incorretos 2'
+                msg: 'Usuário ou senha incorretos'
               });
             }
             else if (bResult) {
@@ -48,7 +48,7 @@ router.post('/loginadmin', (req, res, next) => {
               });
             }
             return res.status(401).send({
-              msg: 'Usuário ou senha incorretos 3'
+              msg: 'Usuário ou senha incorretos'
             });
           }
         );

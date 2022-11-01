@@ -2,7 +2,7 @@ import React from "react";
 import "./LoginAdmin.css"
 import Axios from "axios";
 import {useNavigate} from "react-router-dom"
-import image from "../../res/saci1.png"
+import image from "../../res/saci-admin-white.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 
@@ -23,10 +23,12 @@ export default () => {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
-                console.log(res)
+                console.log(res.data.msg)
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer'+ res.data.token
                 navigate("/dashboard")
+            }).catch((err) =>{
+                alert(err.response.data.msg)
             });
         }
     })
@@ -42,7 +44,32 @@ export default () => {
     }
 
     return (
-        <div className="admin-login-page">
+        <div className="homeAdmin">
+        <div className="leftAdmin">
+            <img src={image} alt="Logo"></img>
+        </div>
+        <div className="rightAdmin">
+            <div className="cardAdmin">
+                <Formik>
+                    <form onSubmit={formik.handleSubmit}>
+                        <h2>Acesso ao dashboard</h2>
+                        <h2>Login: </h2>
+                        <input placeholder="Usuário" name="user" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.user} />
+                        {formik.touched.user && formik.errors.user ? (
+                            <div className="error-message">{formik.errors.user}</div>
+                        ) : null}
+                        <input placeholder="Senha" name="password" id="password" type="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password} />
+                        {formik.touched.password && formik.errors.password ? (
+                            <div className="error-message">{formik.errors.password}</div>
+                        ) : null}
+                        <button type="submit">Login</button>
+                    </form>
+                </Formik>
+                <button onClick={mostrarSenha}>Exibir Senha</button>
+            </div>
+        </div>
+    </div>
+        /*<div className="admin-login-page">
             <div className="formulario">
                 <Formik>
                     <form onSubmit={formik.handleSubmit}>
@@ -63,6 +90,6 @@ export default () => {
                 </Formik>
                 <button onClick={mostrarSenha}>Exibir Senha</button>
             </div>
-        </div>
+        </div>*/
     )
 }

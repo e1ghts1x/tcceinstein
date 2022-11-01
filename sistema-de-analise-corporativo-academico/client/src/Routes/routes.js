@@ -6,6 +6,7 @@ import Home from "../Components/Home/Home";
 import LoginAdmin from "../Components/LoginAdmin/LoginAdmin";
 import NotFound from "../Components/NotFound/NotFound";
 import Quest from "../Components/Quest/Quest";
+import { RequireAuth } from "../Services/auth";
 
 const Rotas = () => {
     return(
@@ -14,7 +15,7 @@ const Rotas = () => {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/quest" element={<Quest/>}/>
                 <Route path="/admin" element={<LoginAdmin/>}/>
-                <Route path="/dashboard" element={<Dashboard/>}/>
+                <Route path="/dashboard" element={<RequireAuth><Dashboard/></RequireAuth>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>

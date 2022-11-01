@@ -1,104 +1,126 @@
 :root{
-  --cinzaEscuro: #E8E8E8;
-  --branco: #FFFFFF;
-  --preto: black;
-  --cor-destaque: #db524b; /* #FFE08F */
-  --cor-realce: #e8362c; /* #EEAD2D*/
-  /*/ #FFC52F */
+  --BackgroundHome: #201b2c;
+  --BackgroundCard: #2f2841;
+  --BackgorundInput: #514869;
+  --white: white;
+  --cinzaClaro: #E8E8E8;
+  --corDestaque: #a83832;
 }
 
-.admin-login-page{
+.homeAdmin{
+  width: 100vw;
   height: 100vh;
-  background-color: var(--cinzaEscuro);
+  background: var(--BackgroundHome);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.formulario{
-  padding-top: 100px;
-  padding-bottom: 100px;
-  padding-left: 50px ;
-  padding-right: 50px;
-  width: 320px;
-  background-color: var(--branco);
-  border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 320px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+.leftAdmin{
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.formulario img{
-  margin: auto;
-  display: block;
-  width: 80%;
-  height: 10vh;
-  min-width: 80%;
-}
-
-.formulario input{
-  width: 94%;
-  border-radius: 5px;
-  outline: none;
-  overflow: hidden;
-  background-color: var(--cinzaEscuro);
-  font: inherit;
-  padding: 0.2em 0.5em;
-  border: 1px solid var(--branco);
-  margin-bottom: 2vh;
-  transition: 0.3s;
-  height: 4vh;
-}
-
-.formulario input:hover{
-  border: 1px solid var(--preto);
-  transition: 0.3s;
-}
-
-.formulario input:focus{
-  border: 1px solid var(--preto);;
-  transition: 0.3s;
-  height: 5vh;
-}
-
-
-.formulario button{
-  margin-top: 18px;
+.leftAdmin img{
   width: 100%;
-  height: 5vh;
+}
+
+.rightAdmin{
+  width: 60vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightAdmin h2{
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 10px;
+  color: var(--white);
+}
+
+
+.cardAdmin{
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px ;
+  background: var(--BackgroundCard);
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #00000056;
+}
+
+.rightAdmin .cardAdmin input{
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: var(--BackgorundInput);
+  color: var(--white);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px #00000056;
   outline: none;
-  overflow: hidden;
-  background-color: var(--cor-destaque);
-  border-radius: 5px;
-  border: 1px solid white;
-  transition: 0.3s;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: 0.5s;
 }
 
-.formulario button:hover{
-  color: #E8E8E8;
-  background-color: var(--cor-realce);
-  border: 1px solid black;
-  transition: 0.3s;
+.rightAdmin .cardAdmin input:focus{
+  border: 1px solid var(--corDestaque);
+  transition: 0.5s;
 }
 
-@media only screen and (max-device-width: 600px) {
-  .formulario{
-    width: 600px;
-    height: 800px;
-    min-height: 800px;
-  }
+.rightAdmin .cardAdmin form{
+  width: 100%;
+}
 
-  .formulario input{
-    height: 3vh;
-  }
+.rightAdmin .cardAdmin button{
+  width: 100%;
+  padding: 16px 0px;
+  border: none;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 800;
+  letter-spacing: 3px;
+  color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
 
-  .formulario input:focus{
-    height: 4vh;
-  }
+.rightAdmin .cardAdmin button:hover{
+  color: white;
+  background-color: var(--corDestaque);
+  transition: 0.5s;
+}   
 
-  .formulario button{
-    font-size: 25px;
-    width: 97%;
-    min-height: 100px;
+
+@media only screen and (max-width: 600px){
+  .homeAdmin{
+      flex-direction: column;
+  }
+  .leftAdmin{
+      width: 100%;
+      height: auto;
+  }
+  .leftAdmin img{
+      width: 50vw;
+      margin-top: 20px;
+  }
+  .rightAdmin .card h2{
+      font-size: 13pt;
+  }
+  .cardAdmin{
+      width: 500px;
+      height: 400px;
   }
 }

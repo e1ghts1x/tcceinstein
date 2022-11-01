@@ -38,7 +38,7 @@
 
 .sidebar a:hover{
     color: #a83832;
-    background-color: var(--cinzaEscuro);
+    background-color: var(--white);
     border-bottom: 1px solid var(--corDestaque);
     transition: 0.5s;
 }

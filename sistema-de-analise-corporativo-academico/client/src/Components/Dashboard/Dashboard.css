@@ -22,7 +22,33 @@
 
 .rightDash{
     width: 50vw;
-    padding-left: 80%;
     height: 100vh;
     position: inherit;
 }
+
+.rightDash .container{
+    margin: 20px;
+    margin-top: 50px ;
+    width: 40%;
+    float: right;
+    display: flex;
+}
+
+.rightDash button{
+    width: 100%;
+    color: var(--white);
+    background-color: #404040;
+    padding: 16px 0px;
+    border: none;
+    margin-left: 30px ;
+    border-radius: 8px;
+    outline: none;
+    font-size: 800;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.rightDash button:hover{
+    background-color: var(--corDestaque);
+    transition: 0.5s;
+  }   

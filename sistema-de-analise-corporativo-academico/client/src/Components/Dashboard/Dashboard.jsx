@@ -31,8 +31,10 @@ export default () => {
                 <Sidebar/>
             </div>
             <div className="rightDash">
-                <button onClick={handleLogout}>Logout</button>
-                <button onClick={handleTest}>Testar</button>
+                <div className="container">
+                    <button onClick={handleLogout}>Logout</button>
+                    <button onClick={handleTest}>Testar</button>
+                </div>
                 <h1>{resultado}</h1>
            </div>
         </div>

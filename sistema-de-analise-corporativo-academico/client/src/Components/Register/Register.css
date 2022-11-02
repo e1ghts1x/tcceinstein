@@ -1,0 +1,128 @@
+:root {
+  --BackgroundHome: #201b2c;
+  --BackgroundCard: #2f2841;
+  --BackgorundInput: #514869;
+  --white: white;
+  --cinzaClaro: #e8e8e8;
+  --corDestaque: #a83832;
+}
+
+.homeRegister {
+  width: 100vw;
+  height: 100vh;
+  background: var(--BackgroundHome);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftRegister {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.leftRegister img {
+  width: 100%;
+}
+
+.rightRegister {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightRegister h2 {
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 10px;
+  color: var(--white);
+}
+
+.cardRegister {
+  width: 600px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  background: var(--BackgroundCard);
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #00000056;
+}
+
+.rightRegister .cardRegister input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: var(--BackgorundInput);
+  color: var(--white);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px #00000056;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: 0.5s;
+}
+
+.rightRegister .cardRegister input:focus {
+  border: 1px solid var(--corDestaque);
+  transition: 0.5s;
+}
+
+.rightRegister .cardRegister form {
+  width: 100%;
+}
+
+.rightRegister .cardRegister button {
+  width: 100%;
+  padding: 16px 0px;
+  border: none;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 800;
+  letter-spacing: 3px;
+  color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.rightRegister .cardRegister button:hover {
+  color: white;
+  background-color: var(--corDestaque);
+  transition: 0.5s;
+}
+
+.rightRegister .cardRegister a{
+    color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .homeRegister {
+    flex-direction: column;
+  }
+  .leftRegister {
+    width: 100%;
+    height: auto;
+  }
+  .leftRegister img {
+    width: 50vw;
+    margin-top: 20px;
+  }
+  .rightRegister .cardRegister h2 {
+    font-size: 13pt;
+  }
+  .cardRegister {
+    width: 500px;
+    height: 400px;
+  }
+}

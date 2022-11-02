@@ -4,6 +4,7 @@ import "./Home.css"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function () {
 
@@ -60,7 +61,7 @@ export default function () {
                         </form>
                     </Formik>
                     <button onClick={mostrarSenha}>Exibir Senha</button>
-                    {/*todo*/}<a>Cadastrar-se</a>
+                    <Link to="/register"><a>Registrar-se</a></Link>
                 </div>
             </div>
         </div>

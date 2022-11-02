@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import image from "../../res/saci-white.png";
 import "./Home.css"
 import { Formik, useFormik } from "formik";
@@ -7,6 +8,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function () {
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -19,11 +21,13 @@ export default function () {
         }),
         onSubmit: (values) => {
             Axios.post("http://localhost:3001/api/login", {
-                user: values.user,
+                username: values.user,
                 password: values.password,
-            }).then((response) => {
-                localStorage.setItem("@user", JSON.stringify(response.config.data));
-                window.location.reload();
+            }).then((res) => {
+                console.log(res.data.msg)
+                localStorage.setItem('token', res.data.token)
+                Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
+                navigate("/quest")
             });
         }
     })

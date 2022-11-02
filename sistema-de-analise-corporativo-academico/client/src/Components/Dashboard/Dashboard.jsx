@@ -21,7 +21,7 @@ export default () => {
 
     const handleLogout = () =>{
         localStorage.removeItem("token")
-        navigate("/admin")
+        navigate("/admin") //Aprimorar
     }
 
 

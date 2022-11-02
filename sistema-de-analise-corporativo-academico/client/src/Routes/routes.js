@@ -15,9 +15,9 @@ const Rotas = () => {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/register" element={<Register/>}/>
-                <Route path="/quest" element={<Quest/>}/>
+                <Route path="/quest" element={<RequireAuth to="/" role="user"><Quest/></RequireAuth>}/>
                 <Route path="/admin" element={<LoginAdmin/>}/>
-                <Route path="/dashboard" element={<RequireAuth to="/admin"><Dashboard/></RequireAuth>}/>
+                <Route path="/dashboard" element={<RequireAuth to="/admin" role="admin"><Dashboard/></RequireAuth>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>

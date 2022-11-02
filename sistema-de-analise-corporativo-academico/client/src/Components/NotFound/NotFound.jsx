@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import "./NotFound.css";
 
 export default () => {
@@ -7,7 +8,7 @@ export default () => {
             <div className="center">
                 <div>
                     <h1>ERRO 404</h1>
-                    <button>Retornar</button>
+                    <Link to="/"><button>Página Inicial</button></Link>
                 </div>
             </div>
         </div>

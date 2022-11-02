@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const db = require("../lib/db.js");
 const adminMiddleware = require("../middleware/admins.js");
+const userMiddleware = require("../middleware/users")
 
 router.post('/loginadmin', (req, res, next) => {
   db.query(
@@ -56,6 +57,35 @@ router.post('/loginadmin', (req, res, next) => {
     );
   });
 
+router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
+  db.query(`SELECT * FROM login where LOWER(login) = LOWER(${db.escape(req.body.username)})`,
+  (err,result) =>{
+    if(result.length){
+      return res.status(409).send({
+        msg: "O nome de usuário não está disponível."
+      })
+    } else{
+      bcrypt.hash(req.body.password, 10, (err,hash)=>{
+        if(err){
+          return res.status(500).send({
+            msg: err
+          })
+        } else{
+          db.query(`INSERT INTO login(login, senha) values (${db.escape(req.body.username)}, ${db.escape(hash)})`,
+          (err, result) =>{
+            if(err){
+              return res.status(400).send({
+                msg: err
+              })
+            } return res.status(201).send({
+              msg: "Usuário registrado."
+            })
+          })
+        }
+      })
+    }
+  })
+})
 
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData)

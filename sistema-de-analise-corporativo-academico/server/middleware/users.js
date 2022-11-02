@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 
 module.exports = {
-  /*validateRegister: (req, res, next) => {
+  validateRegister: (req, res, next) => {
     if (!req.body.username || req.body.username.length < 5) {
       return res.status(400).send({
         msg: "O usuário precisa ter 5 caracteres ou mais",
@@ -13,8 +13,13 @@ module.exports = {
         msg: "A senha precisa conter 8 caracteres ou mais",
       });
     }
+    /*if (!req.body.email || !req.body.email.includes("@")){
+      return res.status(400).send({
+        msg: "O email precisa ser válido",
+      })
+    }*/
     next();
-  },*/
+  },
 
   isLoggedIn: (req, res, next) => {
     try {

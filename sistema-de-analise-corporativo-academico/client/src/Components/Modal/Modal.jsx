@@ -7,7 +7,7 @@ const Modal = props => {
     }
 
     return (
-        <div className="modal" onClick={props.onClose}>
+        <div className="modal">
             <div className="modalConteudo">
                 <div className="modalHeader">
                     <h4 className="modalTitle">{props.titulo}</h4>

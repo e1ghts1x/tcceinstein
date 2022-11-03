@@ -20,7 +20,7 @@ router.post('/loginadmin', (req, res, next) => {
         }
         if (!result.length) {
           return res.status(401).send({
-            msg: 'Usuário ou senha incorretos'
+            msg: 'Usuário ou senha incorretos.'
           });
         }
         bcrypt.compare(
@@ -29,7 +29,7 @@ router.post('/loginadmin', (req, res, next) => {
           (bErr, bResult) => {
             if (bErr) {
               return res.status(401).send({
-                msg: 'Usuário ou senha incorretos'
+                msg: 'Usuário ou senha incorretos.'
               });
             }
             else if (bResult) {
@@ -50,7 +50,7 @@ router.post('/loginadmin', (req, res, next) => {
               });
             }
             return res.status(401).send({
-              msg: 'Usuário ou senha incorretos'
+              msg: 'Usuário ou senha incorretos.'
             });
           }
         );
@@ -69,7 +69,7 @@ router.post("/login", (req, res, next) => {
         }
         if (!result.length) {
           return res.status(401).send({
-            msg: 'Usuário ou senha incorretos 1'
+            msg: 'Usuário ou senha incorretos.'
           });
         }
         bcrypt.compare(
@@ -78,7 +78,7 @@ router.post("/login", (req, res, next) => {
           (bErr, bResult) => {
             if (bErr) {
               return res.status(401).send({
-                msg: 'Usuário ou senha incorretos 2'
+                msg: 'Usuário ou senha incorretos.'
               });
             }
             else if (bResult) {
@@ -99,7 +99,7 @@ router.post("/login", (req, res, next) => {
               });
             }
             return res.status(401).send({
-              msg: 'Usuário ou senha incorretos 3'
+              msg: 'Usuário ou senha incorretos.'
             });
           }
         );
@@ -114,14 +114,15 @@ router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
       return res.status(409).send({
         msg: "O nome de usuário não está disponível."
       })
-    } else{
+    }
+    else{
       bcrypt.hash(req.body.password, 10, (err,hash)=>{
         if(err){
           return res.status(500).send({
             msg: err
           })
         } else{
-          db.query(`INSERT INTO login(login, senha) values (${db.escape(req.body.username)}, ${db.escape(hash)})`,
+          db.query(`INSERT INTO login(login, email, senha) values (${db.escape(req.body.username)}, ${db.escape(req.body.email)}, ${db.escape(hash)})`,
           (err, result) =>{
             if(err){
               return res.status(400).send({
@@ -138,7 +139,7 @@ router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
 })
 
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
-  console.log(req.userData)
+  console.log(req.userData);
   res.send("Usuário logado.");
 }),
 

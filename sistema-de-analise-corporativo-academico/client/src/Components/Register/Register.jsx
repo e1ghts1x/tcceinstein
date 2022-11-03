@@ -21,23 +21,24 @@ export default () => {
         },
         validationSchema: yup.object({
             user: yup.string().required("O campo usuário não pode ser vazio."),
-            //email: yup.string().email().required("O campo email não pode ser vazio."),
+            email: yup.string().email("O email precisa ser válido").required("O campo email não pode ser vazio."),
             password: yup.string().required("O campo senha não pode ser vazio."),
             //passwordRepeat: yup.string().required("Favor, repetir a senha.")
         }),
         onSubmit: (values) => {
             Axios.post(`http://localhost:3001/api/register`, {
                 username: values.user,
-                //email: values.email,
+                email: values.email,
                 password: values.password,
                 //passwordRepeat: values.passwordRepeat
             }).then((res) => {
-                console.log(res.data.msg)
-                alert("Cadastrado")
+                setShowModal(true)
+                setTitulo("Alerta!")
+                setBody(res.data.msg)
             }).catch((err) => {
                 setShowModal(true)
-                setTitulo("Erro")
-                setBody("Algo deu errado")
+                setTitulo("Erro!")
+                setBody(err.response.data.msg)
             });
         }
     })
@@ -68,7 +69,10 @@ export default () => {
                             {formik.touched.user && formik.errors.user ? (
                                 <div className="error-message">{formik.errors.user}</div>
                             ) : null}
-
+                            <input placeholder="email@exemplo.com" name="email" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
+                            {formik.touched.email && formik.errors.email ? (
+                                <div className="error-message">{formik.errors.email}</div>
+                            ) : null}
                             <input placeholder="Senha" name="password" id="password" type="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password} />
                             {formik.touched.password && formik.errors.password ? (
                                 <div className="error-message">{formik.errors.password}</div>
@@ -84,7 +88,4 @@ export default () => {
     )
 }
 
-/*                            <input placeholder="email@exemplo.com" name="email" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
-                            {formik.touched.email && formik.errors.email ? (
-                                <div className="error-message">{formik.errors.email}</div>
-                            ) : null} */
+/* */

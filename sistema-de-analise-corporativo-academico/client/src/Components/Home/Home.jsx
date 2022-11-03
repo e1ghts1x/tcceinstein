@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../../res/saci-white.png";
 import "./Home.css"
@@ -6,8 +6,13 @@ import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import Modal from "../Modal/Modal";
 
 export default function () {
+    const [showModal, setShowModal] = useState()
+    const [titulo, setTitulo] = useState()
+    const [body, setBody] = useState()
+    
     const navigate = useNavigate()
 
     const formik = useFormik({
@@ -24,10 +29,13 @@ export default function () {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
-                console.log(res.data.msg)
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
                 navigate("/quest")
+            }).catch((err, response) =>{
+                setShowModal(true)
+                setTitulo("Erro")
+                setBody(err.response.data.msg)
             });
         }
     })
@@ -48,6 +56,7 @@ export default function () {
                 <img src={image} alt="Logo"></img>
             </div>
             <div className="right">
+                <Modal onClose={() => setShowModal(false)} show={showModal} titulo={titulo} body={body}/>
                 <div className="card">
                     <Formik>
                         <form onSubmit={formik.handleSubmit}>

@@ -35,7 +35,7 @@ export default () => {
             }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro")
-                setBody("Usuário ou senha incorretos")
+                setBody(err.response.data.msg)
             });
         }
     })
@@ -52,7 +52,7 @@ export default () => {
 
     return (
         <div className="homeAdmin">
-            <Modal onClose={() => setShowModal(false)} show={showModal} titulo={titulo} body={body}/>
+            <Modal onClose={() => setShowModal(false)} redirect="/login" show={showModal} titulo={titulo} body={body}/>
             <div className="leftAdmin">
                 <img src={image} alt="Logo"></img>
             </div>

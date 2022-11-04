@@ -28,7 +28,6 @@ export default () => {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
-                console.log(res.data.msg)
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
                 navigate("/dashboard")

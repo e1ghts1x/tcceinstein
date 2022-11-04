@@ -14,11 +14,9 @@ export const RequireAuth = (props) => {
         const decodedToken = jwtdecode(token)
         console.log(decodedToken)
         if (decodedToken.exp  * 1000 < currentDate.getTime()){
-            console.log("Token expirado ou inválido.")
             return <Navigate to={props.to || "/" } />;
         }
         if(decodedToken.role !== role){
-            console.log("Permissão não concedida")
             return <Navigate to={props.to || "/" } />;
         }
     } catch(error){

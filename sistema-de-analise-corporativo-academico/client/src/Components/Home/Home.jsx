@@ -32,7 +32,7 @@ export default function () {
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
                 navigate("/quest")
-            }).catch((err, response) =>{
+            }).catch((err) =>{
                 setShowModal(true)
                 setTitulo("Erro")
                 setBody(err.response.data.msg)
@@ -56,7 +56,7 @@ export default function () {
                 <img src={image} alt="Logo"></img>
             </div>
             <div className="right">
-                <Modal onClose={() => setShowModal(false)} show={showModal} titulo={titulo} body={body}/>
+                <Modal onClose={() =>{setShowModal(false); navigate("/login")}} show={showModal} titulo={titulo}  body={body}/>
                 <div className="card">
                     <Formik>
                         <form onSubmit={formik.handleSubmit}>

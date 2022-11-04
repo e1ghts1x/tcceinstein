@@ -8,9 +8,11 @@ import * as yup from "yup";
 import Modal from "../Modal/Modal";
 
 export default () => {
-    const [showModal, setShowModal] = useState()
-    const [titulo, setTitulo] = useState()
-    const [body, setBody] = useState()
+    const [showModal, setShowModal] = useState();
+    const [titulo, setTitulo] = useState();
+    const [body, setBody] = useState();
+    const [pathToLocation, setPathToLocation] = useState();
+    const [btnTitle, setBtnTitle] = useState();
 
     const navigate = useNavigate()
 
@@ -34,11 +36,14 @@ export default () => {
             }).then((res) => {
                 setShowModal(true)
                 setTitulo("Alerta!")
+                setBtnTitle("Login")
                 setBody(res.data.msg)
+                setPathToLocation("/login")
             }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro!")
                 setBody(err.response.data.msg)
+                setPathToLocation("")
             });
         }
     })
@@ -55,7 +60,7 @@ export default () => {
 
     return (
         <div className="homeRegister">
-            <Modal onClose={() => setShowModal(false)} show={showModal} titulo={titulo} body={body}/>
+            <Modal onClose={() => setShowModal(false)} pathToLocation={pathToLocation} btnTitle={btnTitle} show={showModal} titulo={titulo} body={body}/>
             <div className="leftRegister">
                 <img src={image} alt="Logo"></img>
             </div>
@@ -81,7 +86,7 @@ export default () => {
                         </form>
                     </Formik>
                     <button onClick={mostrarSenha}>Exibir Senha</button>
-                    <Link to="/"><a>Logar</a></Link>
+                    <Link to="/login"><a>Logar</a></Link>
                 </div>
             </div>
         </div>

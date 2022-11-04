@@ -139,8 +139,28 @@ router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
 })
 
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
-  console.log(req.userData);
   res.send("Usuário logado.");
 }),
+
+router.get("/formeditor", adminMiddleware.isLoggedIn, (req, res, next) => {
+  db.query(
+    `SELECT * FROM perguntas`,
+    (err, result) => {
+      if(err) {
+        return res.send.status(400).send({
+          msg:err
+        });
+      }
+      if(!result.length){
+        return res.status(401).send({
+          msg: "Não existem perguntas no banco de dados..."
+        })
+      }
+      return res.status(201).send({
+        result
+      })
+    }
+  )
+})
 
 module.exports = router;

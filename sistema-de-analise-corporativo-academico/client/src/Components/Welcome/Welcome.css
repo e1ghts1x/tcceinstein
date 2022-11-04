@@ -1,0 +1,62 @@
+:root{
+    --BackgroundHome: #201b2c;
+    --BackgroundCard: #2f2841;
+    --BackgorundInput: #514869;
+    --white: white;
+    --cinzaClaro: #E8E8E8;
+    --corDestaque: #a83832;
+}
+
+
+.welcome {
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--BackgroundHome);
+}
+
+.welcomeCenter {
+    width: 500px;
+    height: 500px;
+}
+
+.welcome h2,
+.welcome p {
+    margin-bottom: 1rem;
+}
+
+.welcome h2{
+    color: var(--white);
+}
+.welcome p {
+    color: #8435de;
+}
+
+.welcome img{
+    margin-top: 2rem;
+    max-width: 100%;
+}
+
+.welcome button {
+    color: var(--white);
+    font-weight: bold;
+    margin: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: .8rem 1.5rem;
+    background: linear-gradient(90deg, rgba(132, 53, 222, 1)0%, rgba(184, 84 , 232,1)100%);
+    border-radius: 3rem;
+    border: none;
+  }
+
+.welcome  button:hover{
+    background: linear-gradient(90deg,
+     rgba(184, 84 , 232,1)0%,
+     rgba(132, 53, 222, 1)100%);
+  }
+  

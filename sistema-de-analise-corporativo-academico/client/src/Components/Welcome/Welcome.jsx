@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Welcome.css";
-
 import Feedback from "../../res/quiz.svg"
 
-//import Quiz from "../res/quiz.svg";
 
 const Welcome = () => {
 

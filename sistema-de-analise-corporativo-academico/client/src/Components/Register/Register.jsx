@@ -25,14 +25,12 @@ export default () => {
             user: yup.string().required("O campo usuário não pode ser vazio."),
             email: yup.string().email("O email precisa ser válido").required("O campo email não pode ser vazio."),
             password: yup.string().required("O campo senha não pode ser vazio."),
-            //passwordRepeat: yup.string().required("Favor, repetir a senha.")
         }),
         onSubmit: (values) => {
             Axios.post(`http://localhost:3001/api/register`, {
                 username: values.user,
                 email: values.email,
                 password: values.password,
-                //passwordRepeat: values.passwordRepeat
             }).then((res) => {
                 setShowModal(true)
                 setTitulo("Alerta!")
@@ -60,7 +58,7 @@ export default () => {
 
     return (
         <div className="homeRegister">
-            <Modal onClose={() => setShowModal(false)} pathToLocation={pathToLocation} btnTitle={btnTitle} show={showModal} titulo={titulo} body={body}/>
+            <Modal onClose={() => setShowModal(false)} pathToLocation={pathToLocation} btnTitle={btnTitle} show={showModal} titulo={titulo} body={body} />
             <div className="leftRegister">
                 <img src={image} alt="Logo"></img>
             </div>
@@ -92,5 +90,3 @@ export default () => {
         </div>
     )
 }
-
-/* */

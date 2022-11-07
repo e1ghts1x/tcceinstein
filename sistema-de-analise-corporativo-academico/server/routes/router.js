@@ -138,6 +138,32 @@ router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
   })
 })
 
+router.post("/deletequestion", adminMiddleware.isLoggedIn, (req, res) => {
+  db.query(`SELECT * FROM perguntas WHERE id_pergunta = ${req.body.id_pergunta}`,
+  (err, result) =>{
+    if(err){
+      throw err
+    }
+    if(!result.length){
+      return res.status(409).send({
+        msg: "Pergunta não encontrada no banco de dados."
+      })
+    }
+  else{
+    db.query(`DELETE FROM perguntas WHERE id_pergunta = ${req.body.id_pergunta}`,
+    (err, result) =>{
+      if(err){
+        return res.status(400).send({
+          msg: err
+        })
+      }return res.status(201).send({
+        msg: "Pergunta deletada do banco de dados."
+      })
+    })
+  }
+  })
+})
+
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
   res.send("Usuário logado.");
 }),

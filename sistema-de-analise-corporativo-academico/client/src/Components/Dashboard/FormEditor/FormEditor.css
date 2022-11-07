@@ -1,0 +1,66 @@
+.homeForm{
+    position: absolute;
+    margin-left: 5%;
+    padding: 20px;
+    height: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.leftForm{
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+
+.homeForm input{
+    width: 50vw;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--BackgorundInput);
+    color: var(--white);
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: 0.5s;
+}
+
+.homeForm label{
+    color: var(--white);
+}
+
+.homeForm .cardForm{
+    padding: 20px;
+    background-color: var(--BackgroundCard);
+    border-radius: 10px;
+}
+
+.homeForm button{
+    width: 100px;
+    padding: 10px 0px;
+    border: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 800;
+    letter-spacing: 3px;
+    color: black;
+    cursor: pointer;
+    transition: 0.5s;
+    flex-direction: row;
+}
+
+.homeForm button:hover{
+    color: white;
+    background-color: var(--corDestaque);
+    transition: 0.5s;
+}

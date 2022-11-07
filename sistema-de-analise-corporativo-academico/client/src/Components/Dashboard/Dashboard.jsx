@@ -25,17 +25,19 @@ export default () => {
 
 
     return (
-        <div className="dashboard">
-            <div className="leftDash">
+        <div>
+            <div className="dashboard">
+                <div className="leftDash">
                 <Sidebar />
-            </div>
-            <div className="rightDash">
-                <div className="container">
-                    <button onClick={handleLogout}>Logout</button>
-                    <button onClick={handleTest}>Testar</button>
                 </div>
-                <FormEditor></FormEditor>
+                <div className="rightDash">
+                    <div className="container">
+                        <button onClick={handleLogout}>Logout</button>
+                        <button onClick={handleTest}>Testar</button>
+                    </div>
+                </div>
             </div>
+            <FormEditor/>
         </div>
     )
 }

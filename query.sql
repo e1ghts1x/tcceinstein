@@ -18,9 +18,16 @@ CREATE TABLE login(
     pergunta VARCHAR(70));
 
 INSERT INTO admins(admins, senha) VALUES ("scarecrow", "$2y$10$tiMGK7MYPDTg38QmSefilO4Oags5/9wxiHgVHC5u/bmnSK.DxllMe");
+
 INSERT INTO perguntas (pergunta) VALUES ("Are u gay?");
 INSERT INTO perguntas (pergunta) VALUES ("Chainsaw man o melhor anime de todos?");
 INSERT INTO perguntas (pergunta) VALUES ("E o mangá de chainsaw man, ja leu?");
+INSERT INTO perguntas (pergunta) VALUES ("Eu só quero PEGAR NUMA TETINHAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+INSERT INTO perguntas (pergunta) VALUES ("Power>");
+
+DELETE FROM perguntas WHERE id_pergunta = 1;
+
+DROP TABLE PERGUNTAS;
 
 SELECT * FROM admins;
 SELECT * FROM login;

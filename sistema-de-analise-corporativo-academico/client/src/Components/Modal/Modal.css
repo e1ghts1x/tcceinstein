@@ -21,7 +21,8 @@
 }
 
 .modalConteudo{
-    width: 500px;
+    max-width: 500px;
+    width: 50%;
     background-color: var(--BackgroundCard);
     border-radius: 10px;
     box-shadow: 0px 10px 40px #00000056;
@@ -62,4 +63,4 @@
     color: white;
     background-color: var(--corDestaque);
     transition: 0.5s;
-  }   
+}   

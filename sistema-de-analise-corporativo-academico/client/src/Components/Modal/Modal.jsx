@@ -1,16 +1,29 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import "./Modal.css"
 
 const Modal = props => {
+
+    const escapeClose = (e) => {
+        if((e.charCode || e.keyCode) === 27) {
+            props.onClose()
+        }
+    }
+
+    useEffect(() =>{
+        document.body.addEventListener('keydown', escapeClose)
+        return function cleanup() {
+            document.body.removeEventListener('keydown', escapeClose)
+        }
+    }, [])
 
     if(!props.show){
         return null
     }
 
     return (
-        <div className="modal">
-            <div className="modalConteudo">
+        <div className="modal" onClick={props.onClose}>
+            <div className="modalConteudo" onClick={e => e.stopPropagation()}>
                 <div className="modalHeader">
                     <h4 className="modalTitle">{props.titulo || "Erro!"}</h4>
                 </div>

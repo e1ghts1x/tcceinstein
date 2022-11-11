@@ -164,6 +164,34 @@ router.post("/deletequestion", adminMiddleware.isLoggedIn, (req, res) => {
   })
 })
 
+router.post("/addquestion", adminMiddleware.isLoggedIn, (req, res, next) =>{
+  db.query(`INSERT INTO perguntas (pergunta) VALUES ('${req.body.pergunta}')`,
+  (err, result) =>{
+    if(err){
+      return res.status(400).send({
+        msg: err
+      })
+    }
+    return res.status(201).send({
+      msg: "Pergunta cadastrada no banco de dados com sucesso!"
+    })
+  })
+})
+
+router.post("/updatequestion", adminMiddleware.isLoggedIn, (req, res) => {
+  db.query(`UPDATE perguntas SET pergunta = ${req.body.pergunta} WHERE id_pergunta = ${req.body.id_pergunta}`,
+  (err, result) =>{
+    if(err){
+      return res.status(400).send({
+        msg: err
+      })
+    }
+    return res.status(201).send({
+      msg: "Pergunta alterada no banco de dados com sucesso!"
+    })
+  })
+})
+
 router.get("/dashboard", adminMiddleware.isLoggedIn, (req, res, next) => {
   res.send("Usuário logado.");
 }),
@@ -188,5 +216,6 @@ router.get("/formeditor", adminMiddleware.isLoggedIn, (req, res, next) => {
     }
   )
 })
+
 
 module.exports = router;

@@ -37,7 +37,6 @@ export default () => {
                     </div>
                 </div>
             </div>
-            <FormEditor/>
         </div>
     )
 }

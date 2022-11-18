@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Welcome.css";
+import WelcomeCss from "./Welcome.module.css";
 import Feedback from "../../res/quiz.svg"
 
 
 const Welcome = () => {
 
   return (
-    <div className="welcome">
-      <div className="welcomeCenter">
+    <div className={WelcomeCss["welcome"]}>
+      <div className={WelcomeCss["welcomeCenter"]}>
         <h2>Seja bem-vindo ao Saci!</h2>
         <p>Selecione uma opção: </p>
         <Link to="/login"><button>Cliente</button></Link>

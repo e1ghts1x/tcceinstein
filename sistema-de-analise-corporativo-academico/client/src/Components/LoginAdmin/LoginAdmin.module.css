@@ -31,7 +31,7 @@
 
 .rightAdmin{
   width: 80vw;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,6 +108,10 @@
   .homeAdmin{
       flex-direction: column;
   }
+  .cardAdmin{
+    width: 500px;
+    height: 400px;
+  } 
   .leftAdmin{
       width: 100%;
       height: auto;
@@ -116,11 +120,7 @@
       width: 50vw;
       margin-top: 20px;
   }
-  .rightAdmin .card h2{
+  .rightAdmin .cardAdmin h2{
       font-size: 13pt;
-  }
-  .cardAdmin{
-      width: 500px;
-      height: 400px;
   }
 }

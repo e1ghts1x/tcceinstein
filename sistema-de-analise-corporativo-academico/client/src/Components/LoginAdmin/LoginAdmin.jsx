@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import "./LoginAdmin.css"
+import LoginAdmin from "./LoginAdmin.module.css"
 import Axios from "axios";
+import { baseURL } from "../../Services/api";
 import { useNavigate } from "react-router-dom"
 import image from "../../res/saci-admin-white.png"
 import { Formik, useFormik } from "formik";
@@ -24,7 +25,7 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post(`http://localhost:3001/api/loginadmin`, {
+            Axios.post(`${baseURL}/loginadmin`, {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
@@ -50,13 +51,13 @@ export default () => {
     }
 
     return (
-        <div className="homeAdmin">
+        <div className={LoginAdmin["homeAdmin"]}>
             <Modal onClose={() => setShowModal(false)} redirect="/login" show={showModal} titulo={titulo} body={body}/>
-            <div className="leftAdmin">
+            <div className={LoginAdmin["leftAdmin"]}>
                 <img src={image} alt="Logo"></img>
             </div>
-            <div className="rightAdmin">
-                <div className="cardAdmin">
+            <div className={LoginAdmin["rightAdmin"]}>
+                <div className={LoginAdmin["cardAdmin"]}>
                     <Formik>
                         <form onSubmit={formik.handleSubmit}>
                             <h2>Acesso ao dashboard</h2>

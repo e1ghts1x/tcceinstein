@@ -1,0 +1,122 @@
+:root{
+    --sidebarBackgroundColor: #404040;
+    --white: white;
+    --cinzaClaro: #E8E8E8;
+    --corDestaque: #a83832;
+}
+
+.sidebar{
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    background-color: var(--sidebarBackgroundColor);
+    top: 0;
+    left: 0;
+    padding-top: 70px;
+    transition: 0.5s;
+}
+
+.sidebar img{
+    width: 60%;
+    position: relative;
+}
+
+.sidebar a{
+    padding: 10px 10px 10px 32px;
+    text-decoration: none;
+    width: 80%;
+    float: right;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius:10px ;
+    font-size: 20px;
+    color: var(--white);
+    display: block;
+    transition: 0.5s;
+}
+
+.sidebar a:hover{
+    color: #a83832;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--corDestaque);
+    transition: 0.5s;
+}
+
+.sidebar a:focus{
+    color: var(--corDestaque);
+    background-color: var(--white);
+    transition: 0.5s;
+    border-bottom: 1px solid var(--corDestaque);
+}
+
+.sidebar a:active{
+    color: var(--corDestaque);
+    background-color: var(--white);
+    transition: 0.5s;
+    border-bottom: 1px solid var(--corDestaque);
+}
+.main{
+    width: 50px;
+    height: 50px;
+}
+
+.openbtn{
+    margin: 10px;
+    width: 50px;
+    padding: 16px 0px;
+    border: none;
+    margin-bottom: 12px;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 800;
+    background-color: var(--sidebarBackgroundColor);
+    color: var(--white);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.openbtn button{
+    margin-top: 10px;
+}
+
+.openbtn:hover{
+    color: var(--corDestaque);
+    transition: 0.2s;
+}
+
+.closebtn{
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    transition: 0.2s;
+}
+
+.closebtn:hover{
+    color: var(--corDestaque);
+    background-color: var(--sidebarBackgroundColor);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.logoutbtn{
+    width: 100px;
+    margin-left: 10px;
+    color: var(--white);
+    background-color: #404040;
+    padding: 16px 0px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 800;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {width: 100px; }
+    .sidebar a {font-size: 80%;}
+    .sidebar p {font-size: 30px;}
+  }

@@ -3,8 +3,8 @@ import Axios from "axios";
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Modal from "../../Modal/Modal";
-import "./FormEditor.css"
-import { config } from "../../../Services/api";
+import FormEditor from "./FormEditor.module.css"
+import { config, baseURL } from "../../../Services/api";
 
 export default () => {
     const [showModal, setShowModal] = useState()
@@ -27,34 +27,30 @@ export default () => {
             question: yup.string().required("O campo pergunta não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post(`http://localhost:3001/api/addquestion`, {pergunta: values.question,}, config)
+            Axios.post(`${baseURL}/addquestion`, {pergunta: values.question,}, config)
             .then((res) =>{
                 setShowModal(true)
                 setTitulo("Sucesso!")
                 setBody(res.data.msg)
-                console.log(res)
                 setReload(1)
                 values.question = ""
             }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro!")
                 setBody(err.response.data.msg)
-                console.log(err)
             })
             setReload(0)
         }
     })
  
     const deleteQuestion = (questionId) => {
-        Axios.post(`http://localhost:3001/api/deletequestion`, { id_pergunta: questionId }, config)
+        Axios.post(`${baseURL}/deletequestion`, { id_pergunta: questionId }, config)
             .then((res) => {
                 setShowModal(true)
                 setTitulo("Sucesso!")
-                setBody(res.data.msg)
-                console.log(res)
+                setBody(res.data.msg || "Sucesso!")
                 setReload(1)
             }).catch((err) => {
-                console.log(err)
                 setShowModal(true)
                 setTitulo("Erro!")
                 setBody(err.response.data.msg)
@@ -63,11 +59,11 @@ export default () => {
     }
 
     const updateQuestion = (pergunta, questionId) => {
-        Axios.post(`http://localhost:3001/api/updatequestion`, {pergunta: pergunta, id_pergunta: questionId}, config)
+        Axios.post(`${baseURL}/updatequestion`, {pergunta: pergunta, id_pergunta: questionId}, config)
             .then((res) =>{
                 setShowModal(true)
                 setTitulo("Sucesso!")
-                setBody(res.data.msg)
+                setBody(res.data.msg || "Sucesso!")
                 setReload(1)
             }).catch((err) =>{
                 setShowModal(true)
@@ -78,20 +74,22 @@ export default () => {
     }
 
     useEffect(() => {
-        Axios.get(`http://localhost:3001/api/formeditor`, config)
+        Axios.get(`${baseURL}/formeditor`, config)
             .then((res) => {
                 const mapa = res.data.result.map(pergunta => {
                     return (
                         <div key={pergunta.id_pergunta}>
-                            <input name="inputPergunta" key={pergunta.id_pergunta} value={pergunta.pergunta} onChange={(e) => handleAlter(e)}></input>
+                            <input onChange={formik.handleChange} onBlur={formik.handleBlur} key={pergunta.id_pergunta} value={pergunta.pergunta}></input>
                             <button type="button" onClick={() => { deleteQuestion(pergunta.id_pergunta) }}>Excluir</button>
                             <button type="button">Alterar</button>
                         </div>
                     )
                 })
-                console.log(mapa)
                 setPerguntas(mapa)
             }).catch((err) => {
+                setShowModal(true)
+                setTitulo("Erro!")
+                setBody(err.response.data.msg)
                 setPerguntas()
                 console.log(err.response.data.msg)
             })
@@ -100,15 +98,15 @@ export default () => {
 
     return (
         <div>
-            <div className="homeForm">
-                <div className="leftForm">
-                    <div className="cardForm">
+            <div id="homeForm" className={FormEditor["homeForm"]}>
+                <div className={FormEditor["leftForm"]}>
+                    <div className={FormEditor["cardForm"]}>
                         <Formik>
                             <form onSubmit={formik.handleSubmit}>
                                 {perguntas}
                                 <input onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.question} name="question" placeholder="Pergunta..."></input>
                                 {formik.touched.question && formik.errors.question ? (
-                                <div className="error-message">{formik.errors.question}</div>
+                                <div className={"error-message"}>{formik.errors.question}</div>
                                 ) : null}
                                 <button type="submit">Adicionar</button>
                             </form>

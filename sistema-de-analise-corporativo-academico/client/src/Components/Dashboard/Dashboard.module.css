@@ -5,42 +5,19 @@
     --corDestaque: #a83832;
 }
 
-.dashboard{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.leftDash{
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.rightDash{
-    width: 50vw;
-    height: 100vh;
-    position: inherit;
-}
 
 .rightDash .container{
-    margin: 20px;
-    margin-top: 50px ;
-    width: 40%;
+    margin-top: 10px;
     float: right;
-    display: flex;
+    margin-right: 25px;
 }
 
 .rightDash button{
-    width: 100%;
+    width: 100px;
     color: var(--white);
     background-color: #404040;
     padding: 16px 0px;
     border: none;
-    margin-left: 2%;
     border-radius: 8px;
     outline: none;
     font-size: 800;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Register.css"
+import Register from "./Register.module.css"
 import Axios from "axios";
-import { useNavigate, Link } from "react-router-dom"
+import { baseURL } from "../../Services/api";
 import image from "../../res/saci-white.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
@@ -14,7 +14,6 @@ export default () => {
     const [pathToLocation, setPathToLocation] = useState();
     const [btnTitle, setBtnTitle] = useState();
 
-    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -27,7 +26,7 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio."),
         }),
         onSubmit: (values) => {
-            Axios.post(`http://localhost:3001/api/register`, {
+            Axios.post(`${baseURL}/register`, {
                 username: values.user,
                 email: values.email,
                 password: values.password,
@@ -57,13 +56,13 @@ export default () => {
     }
 
     return (
-        <div className="homeRegister">
+        <div className={Register["homeRegister"]}>
             <Modal onClose={() => setShowModal(false)} pathToLocation={pathToLocation} btnTitle={btnTitle} show={showModal} titulo={titulo} body={body} />
-            <div className="leftRegister">
+            <div className={Register["leftRegister"]}>
                 <img src={image} alt="Logo"></img>
             </div>
-            <div className="rightRegister">
-                <div className="cardRegister">
+            <div className={Register["rightRegister"]}>
+                <div className={Register["cardRegister"]}>
                     <Formik>
                         <form onSubmit={formik.handleSubmit}>
                             <h2>Bem vindo ao nosso sistema de NPS</h2>
@@ -84,7 +83,7 @@ export default () => {
                         </form>
                     </Formik>
                     <button onClick={mostrarSenha}>Exibir Senha</button>
-                    <Link to="/login"><a>Logar</a></Link>
+                    <a href="/login">Logar</a>
                 </div>
             </div>
         </div>

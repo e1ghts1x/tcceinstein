@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../../res/saci-white.png";
-import "./Home.css"
+import Home from "./Home.module.css"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+import { baseURL } from "../../Services/api";
 import Modal from "../Modal/Modal";
 
 export default function () {
@@ -25,7 +25,7 @@ export default function () {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post("http://localhost:3001/api/login", {
+            Axios.post(`${baseURL}/login`, {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
@@ -51,13 +51,13 @@ export default function () {
     }
 
     return (
-        <div className="home">
-            <div className="left">
+        <div className={Home["home"]}>
+            <div className={Home["left"]}>
                 <img src={image} alt="Logo"></img>
             </div>
-            <div className="right">
+            <div className={Home["right"]}>
                 <Modal onClose={() =>{setShowModal(false); navigate("/login")}} show={showModal} titulo={titulo}  body={body}/>
-                <div className="card">
+                <div className={Home["card"]}>
                     <Formik>
                         <form onSubmit={formik.handleSubmit}>
                             <h2>Bem-vindo ao sistema de avaliação NPS</h2>
@@ -74,7 +74,7 @@ export default function () {
                         </form>
                     </Formik>
                     <button onClick={mostrarSenha}>Exibir Senha</button>
-                    <Link to="/register"><a>Registrar-se</a></Link>
+                    <a href="/register">Registrar-se</a>
                 </div>
             </div>
         </div>

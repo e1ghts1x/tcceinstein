@@ -179,7 +179,7 @@ router.post("/addquestion", adminMiddleware.isLoggedIn, (req, res, next) =>{
 })
 
 router.post("/updatequestion", adminMiddleware.isLoggedIn, (req, res) => {
-  db.query(`UPDATE perguntas SET pergunta = ${req.body.pergunta} WHERE id_pergunta = ${req.body.id_pergunta}`,
+  db.query(`UPDATE perguntas SET pergunta = "${req.body.pergunta}" WHERE id_pergunta = ${req.body.id_pergunta}`,
   (err, result) =>{
     if(err){
       return res.status(400).send({

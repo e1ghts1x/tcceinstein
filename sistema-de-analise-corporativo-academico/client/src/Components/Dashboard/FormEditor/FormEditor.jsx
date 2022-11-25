@@ -12,12 +12,6 @@ export default () => {
     const [body, setBody] = useState()
     const [perguntas, setPerguntas] = useState()
     const [reload, setReload] = useState(0)
-    const [ alter, setAlter ] = useState()
-
-    const handleAlter = (e) => {
-        e.preventDefault()
-        setAlter(e.target.value)
-    }
 
     const formik = useFormik({
         initialValues: {
@@ -27,22 +21,22 @@ export default () => {
             question: yup.string().required("O campo pergunta não pode ser vazio.")
         }),
         onSubmit: (values) => {
-            Axios.post(`${baseURL}/addquestion`, {pergunta: values.question,}, config)
-            .then((res) =>{
-                setShowModal(true)
-                setTitulo("Sucesso!")
-                setBody(res.data.msg)
-                setReload(1)
-                values.question = ""
-            }).catch((err) => {
-                setShowModal(true)
-                setTitulo("Erro!")
-                setBody(err.response.data.msg)
-            })
+            Axios.post(`${baseURL}/addquestion`, { pergunta: values.question, }, config)
+                .then((res) => {
+                    setShowModal(true)
+                    setTitulo("Sucesso!")
+                    setBody(res.data.msg)
+                    setReload(1)
+                    values.question = ""
+                }).catch((err) => {
+                    setShowModal(true)
+                    setTitulo("Erro!")
+                    setBody(err.response.data.msg || "Ocorreu um erro!")
+                })
             setReload(0)
         }
     })
- 
+
     const deleteQuestion = (questionId) => {
         Axios.post(`${baseURL}/deletequestion`, { id_pergunta: questionId }, config)
             .then((res) => {
@@ -53,48 +47,65 @@ export default () => {
             }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro!")
-                setBody(err.response.data.msg)
+                setBody(err.response.data.msg || "Sucesso!")
             })
         setReload(0)
     }
 
     const updateQuestion = (pergunta, questionId) => {
-        Axios.post(`${baseURL}/updatequestion`, {pergunta: pergunta, id_pergunta: questionId}, config)
-            .then((res) =>{
+        Axios.post(`${baseURL}/updatequestion`, { pergunta: pergunta, id_pergunta: questionId }, config)
+            .then((res) => {
                 setShowModal(true)
                 setTitulo("Sucesso!")
                 setBody(res.data.msg || "Sucesso!")
                 setReload(1)
-            }).catch((err) =>{
+            }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro!")
-                setBody(err.response.data.msg)
+                setBody(err.response.data.msg || "Ocorreu um erro!")
             })
-            setReload(0)
+        setReload(0)
     }
 
     useEffect(() => {
         Axios.get(`${baseURL}/formeditor`, config)
             .then((res) => {
                 const mapa = res.data.result.map(pergunta => {
+                    const perguntaField = `pergunta-${pergunta.id_pergunta}`
+                    console.log(pergunta);
                     return (
-                        <div key={pergunta.id_pergunta}>
-                            <input onChange={formik.handleChange} onBlur={formik.handleBlur} key={pergunta.id_pergunta} value={pergunta.pergunta}></input>
-                            <button type="button" onClick={() => { deleteQuestion(pergunta.id_pergunta) }}>Excluir</button>
-                            <button type="button">Alterar</button>
-                        </div>
+                        <Formik
+                            initialValues={{
+                                [perguntaField]: pergunta.pergunta
+                            }}
+                            validationSchema= {yup.object({
+                                [perguntaField]: yup.string().required("Para alterar a pergunta, o campo não pode ser vazio.")
+                            })}
+                        >
+                            {props => (
+                                <form>
+                                    <div key={pergunta.id_pergunta}>
+                                        <input key={pergunta.id_pergunta} onChange={props.handleChange} onBlur={props.handleBlur} value={props.values[perguntaField]} name={perguntaField}></input>
+                                        {props.touched[perguntaField] && props.errors[perguntaField] ? (
+                                            <div className={"error-message"}>{props.errors[perguntaField]}</div>
+                                        ) : null}
+                                        <button type="button" onClick={() => { deleteQuestion(pergunta.id_pergunta) }}>Excluir</button>
+                                        <button type="button" disabled={!(props.isValid)} onClick={() => { updateQuestion(props.values[perguntaField], pergunta.id_pergunta) }}>Alterar</button>
+                                    </div>
+                                </form>
+                            )}
+                        </Formik>
                     )
                 })
                 setPerguntas(mapa)
             }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro!")
-                setBody(err.response.data.msg)
+                setBody(err.response.data.msg || "Ocorreu um erro!")
                 setPerguntas()
                 console.log(err.response.data.msg)
             })
     }, [reload])
-
 
     return (
         <div>
@@ -106,15 +117,15 @@ export default () => {
                                 {perguntas}
                                 <input onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.question} name="question" placeholder="Pergunta..."></input>
                                 {formik.touched.question && formik.errors.question ? (
-                                <div className={"error-message"}>{formik.errors.question}</div>
+                                    <div className={"error-message"}>{formik.errors.question}</div>
                                 ) : null}
-                                <button type="submit">Adicionar</button>
+                                <button type="submit" disabled={!(formik.isValid)}>Adicionar</button>
                             </form>
                         </Formik>
                     </div>
                 </div>
             </div>
-            <Modal onClose={() => {{setShowModal(false)}}} show={showModal} titulo={titulo} body={body} />
+            <Modal onClose={() => { { setShowModal(false) } }} show={showModal} titulo={titulo} body={body} />
         </div>
     )
 }

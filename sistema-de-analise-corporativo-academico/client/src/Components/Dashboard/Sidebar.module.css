@@ -116,7 +116,11 @@
 }
 
 @media screen and (max-width: 800px) {
-    .sidebar {width: 100px; }
+    .sidebar {width: 140px;}
     .sidebar a {font-size: 80%;}
     .sidebar p {font-size: 30px;}
-  }
+}
+
+@media screen and (max-width: 600px){
+    .sidebar {width: 100px;}
+}

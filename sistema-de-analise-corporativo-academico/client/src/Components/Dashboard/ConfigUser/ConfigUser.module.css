@@ -64,3 +64,11 @@
     background-color: var(--corDestaque);
     transition: 0.5s;
 }
+
+.cardForm{
+    margin-bottom: 20px ;
+}
+
+.cardForm h2 {
+    color: white;
+}

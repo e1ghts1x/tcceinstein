@@ -217,5 +217,25 @@ router.get("/formeditor", adminMiddleware.isLoggedIn, (req, res, next) => {
   )
 })
 
+router.get("/configadminuser", adminMiddleware.isLoggedIn, (req, res, next) => {
+  db.query(
+    `SELECT admins FROM admins`,
+    (err, result) => {
+      if(err) {
+        return res.send.status(400).send({
+          msg:err
+        });
+      }
+      if(!result.length){
+        return res.status(401).send({
+          msg: "Não existem administradores no sistema."
+        })
+      }
+      return res.status(201).send({
+        result
+      })
+    }
+  )
+})
 
 module.exports = router;

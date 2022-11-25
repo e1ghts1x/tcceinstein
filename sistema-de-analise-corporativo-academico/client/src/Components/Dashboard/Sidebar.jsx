@@ -8,6 +8,7 @@ import { faGear } from '@fortawesome/free-solid-svg-icons'
 import sidebar from "./Sidebar.module.css"
 import image from "../../res/saci-white.png"
 import { useEffect } from "react";
+import ConfigUser from "./ConfigUser/ConfigUser";
 
 export default function () {
 
@@ -63,7 +64,7 @@ export default function () {
             </div>
             {showAnalysis && <Analysis/>}
             {showEditForm && <FormEditor/>}
-            {showConfig}
+            {showConfig && <ConfigUser/>}
         </div>
     )
 }

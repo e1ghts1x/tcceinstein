@@ -11,10 +11,11 @@ export default () => {
 
     return (
         <div>
-            <div className={Analysis["homeForm"]}>
-                <div className={Analysis["leftForm"]}>
-                    <div className={Analysis["cardForm"]}>
+            <div id="homeForm" className={Analysis["homeForm"]}>
+                <div id="leftForm" className={Analysis["leftForm"]}>
+                    <div id="cardForm" className={Analysis["cardForm"]}>
                         <h1>Teste</h1>
+                        <input></input>
                     </div>
                 </div>
             </div>

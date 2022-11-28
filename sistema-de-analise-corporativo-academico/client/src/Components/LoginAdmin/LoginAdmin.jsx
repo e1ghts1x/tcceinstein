@@ -7,11 +7,13 @@ import image from "../../res/saci-admin-white.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Modal from "../Modal/Modal";
+import IsLoading from "../isLoading/IsLoading";
 
 export default () => {
     const [showModal, setShowModal] = useState()
     const [titulo, setTitulo] = useState()
     const [body, setBody] = useState()
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -25,14 +27,19 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
+            setIsLoading(true)
             Axios.post(`${baseURL}/loginadmin`, {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
-                navigate("/dashboard")
+                setTimeout(function() {
+                    setIsLoading(false)
+                    navigate("/dashboard")
+                }, 1000)
             }).catch((err) => {
+                setIsLoading(false)
                 setShowModal(true)
                 setTitulo("Erro")
                 setBody(err.response.data.msg)
@@ -52,6 +59,7 @@ export default () => {
 
     return (
         <div className={LoginAdmin["homeAdmin"]}>
+            {isLoading && <div><IsLoading /></div>}
             <Modal onClose={() => setShowModal(false)} redirect="/login" show={showModal} titulo={titulo} body={body}/>
             <div className={LoginAdmin["leftAdmin"]}>
                 <img src={image} alt="Logo"></img>

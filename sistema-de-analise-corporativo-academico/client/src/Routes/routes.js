@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Dashboard from "../Components/Dashboard/Dashboard";
 import Home from "../Components/Home/Home";
+import IsLoading from "../Components/isLoading/IsLoading";
 import LoginAdmin from "../Components/LoginAdmin/LoginAdmin";
 import NotFound from "../Components/NotFound/NotFound";
 import Quest from "../Components/Quest/Quest";
@@ -21,6 +22,7 @@ const Rotas = () => {
                 <Route path="/admin" element={<LoginAdmin/>}/>
                 <Route path="/dashboard" element={<RequireAuth to="/admin" role="admin"><Dashboard/></RequireAuth>}/>
                 <Route path="*" element={<NotFound/>}/>
+                <Route path="/testar" element={<IsLoading/>}/>
             </Routes>
         </BrowserRouter>
     )

@@ -7,11 +7,13 @@ import * as yup from "yup";
 import Axios from "axios";
 import { baseURL } from "../../Services/api";
 import Modal from "../Modal/Modal";
+import IsLoading from "../isLoading/IsLoading";
 
 export default function () {
     const [showModal, setShowModal] = useState()
     const [titulo, setTitulo] = useState()
     const [body, setBody] = useState()
+    const [isLoading, setIsLoading] = useState(false)
     
     const navigate = useNavigate()
 
@@ -25,14 +27,17 @@ export default function () {
             password: yup.string().required("O campo senha não pode ser vazio.")
         }),
         onSubmit: (values) => {
+            setIsLoading(true)
             Axios.post(`${baseURL}/login`, {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
+                setIsLoading(false)
                 localStorage.setItem('token', res.data.token)
                 Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
                 navigate("/quest")
             }).catch((err) =>{
+                setIsLoading(false)
                 setShowModal(true)
                 setTitulo("Erro")
                 setBody(err.response.data.msg)
@@ -52,6 +57,7 @@ export default function () {
 
     return (
         <div className={Home["home"]}>
+            {isLoading && <div><IsLoading /></div>}
             <div className={Home["left"]}>
                 <img src={image} alt="Logo"></img>
             </div>

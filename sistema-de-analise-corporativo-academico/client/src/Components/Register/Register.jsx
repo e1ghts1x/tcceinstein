@@ -6,6 +6,7 @@ import image from "../../res/saci-white.png"
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Modal from "../Modal/Modal";
+import IsLoading from "../isLoading/IsLoading";
 
 export default () => {
     const [showModal, setShowModal] = useState();
@@ -13,6 +14,7 @@ export default () => {
     const [body, setBody] = useState();
     const [pathToLocation, setPathToLocation] = useState();
     const [btnTitle, setBtnTitle] = useState();
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const formik = useFormik({
@@ -26,17 +28,20 @@ export default () => {
             password: yup.string().required("O campo senha não pode ser vazio."),
         }),
         onSubmit: (values) => {
+            setIsLoading(true)
             Axios.post(`${baseURL}/register`, {
                 username: values.user,
                 email: values.email,
                 password: values.password,
             }).then((res) => {
+                setIsLoading(false)
                 setShowModal(true)
                 setTitulo("Alerta!")
                 setBtnTitle("Login")
                 setBody(res.data.msg)
                 setPathToLocation("/login")
             }).catch((err) => {
+                setIsLoading(false)
                 setShowModal(true)
                 setTitulo("Erro!")
                 setBody(err.response.data.msg)
@@ -57,6 +62,7 @@ export default () => {
 
     return (
         <div className={Register["homeRegister"]}>
+            {isLoading && <div><IsLoading /></div>}
             <Modal onClose={() => setShowModal(false)} pathToLocation={pathToLocation} btnTitle={btnTitle} show={showModal} titulo={titulo} body={body} />
             <div className={Register["leftRegister"]}>
                 <img src={image} alt="Logo"></img>

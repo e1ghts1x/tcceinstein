@@ -47,7 +47,7 @@ export default () => {
             }).catch((err) => {
                 setShowModal(true)
                 setTitulo("Erro!")
-                setBody(err.response.data.msg || "Sucesso!")
+                setBody(err.response.data.msg || "Ocorreu um erro!")
             })
         setReload(0)
     }
@@ -72,7 +72,6 @@ export default () => {
             .then((res) => {
                 const mapa = res.data.result.map(pergunta => {
                     const perguntaField = `pergunta-${pergunta.id_pergunta}`
-                    console.log(pergunta);
                     return (
                         <Formik
                             initialValues={{
@@ -83,7 +82,7 @@ export default () => {
                             })}
                         >
                             {props => (
-                                <form>
+                                <form key={pergunta.id_pergunta}>
                                     <div key={pergunta.id_pergunta}>
                                         <input key={pergunta.id_pergunta} onChange={props.handleChange} onBlur={props.handleBlur} value={props.values[perguntaField]} name={perguntaField}></input>
                                         {props.touched[perguntaField] && props.errors[perguntaField] ? (
@@ -114,6 +113,7 @@ export default () => {
                     <div className={FormEditor["cardForm"]}>
                         <Formik>
                             <form onSubmit={formik.handleSubmit}>
+                                <h2>Perguntas no banco de dados:</h2>
                                 {perguntas}
                                 <input onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.question} name="question" placeholder="Pergunta..."></input>
                                 {formik.touched.question && formik.errors.question ? (

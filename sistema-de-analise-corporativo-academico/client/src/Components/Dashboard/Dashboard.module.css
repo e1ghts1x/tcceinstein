@@ -8,8 +8,14 @@
 
 .rightDash .container{
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
     float: right;
     margin-right: 25px;
+}
+
+.rightDash .container h4{
+    margin-right: 10px;
 }
 
 .rightDash button{
@@ -28,4 +34,4 @@
 .rightDash button:hover{
     background-color: var(--corDestaque);
     transition: 0.5s;
-  }   
+}   

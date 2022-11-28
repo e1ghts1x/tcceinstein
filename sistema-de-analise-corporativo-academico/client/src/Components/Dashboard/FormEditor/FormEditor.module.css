@@ -65,6 +65,14 @@
     transition: 0.5s;
 }
 
+.cardForm{
+    margin-top: 10px;
+}
+
+.cardForm h2 {
+    color: white;
+}
+
 ::-webkit-scrollbar {
     width: 20px;
 }

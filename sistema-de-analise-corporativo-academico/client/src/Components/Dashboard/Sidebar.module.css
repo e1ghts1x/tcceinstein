@@ -42,6 +42,13 @@
     transition: 0.5s;
 }
 
+.sidebar a:active{
+    color: var(--corDestaque);
+    background-color: var(--white);
+    transition: 0.5s;
+    border-bottom: 1px solid var(--corDestaque);
+}
+
 .sidebar a:focus{
     color: var(--corDestaque);
     background-color: var(--white);

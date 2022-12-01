@@ -17,6 +17,7 @@ export default () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token")
+        delete Axios.defaults.headers.common['Authorization']
         navigate("/admin") //Aprimorar
     }
 

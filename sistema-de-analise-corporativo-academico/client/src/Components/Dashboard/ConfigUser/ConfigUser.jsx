@@ -3,6 +3,7 @@ import Axios from "axios";
 import Modal from "../../Modal/Modal";
 import { Formik, useFormik } from "formik";
 import * as yup from "yup";
+import jwtdecode from "jwt-decode"
 import ConfigUser from "./ConfigUser.module.css"
 import { config, baseURL } from "../../../Services/api";
 
@@ -12,6 +13,9 @@ export default () => {
     const [titulo, setTitulo] = useState()
     const [body, setBody] = useState()
     const [admins, setAdmins] = useState()
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtdecode(token)
+    const username = decodedToken.username
 
     const formik = useFormik({
         initialValues: {
@@ -39,8 +43,8 @@ export default () => {
         }
     })
 
-    const deleteAdmin = (idLogin) => {
-        Axios.post(`${baseURL}/deleteadminuser`, { id_login: idLogin}, config)
+    const deleteAdmin = (idLogin, username) => {
+        Axios.post(`${baseURL}/deleteadminuser`, { id_login: idLogin, username: username}, config)
             .then((res) => {
                 setShowModal(true)
                 setTitulo("Sucesso!")
@@ -58,11 +62,10 @@ export default () => {
         Axios.get(`${baseURL}/configadminuser`, config)
             .then((res) => {
                 const mapa = res.data.result.map(admin => {
-                    
                     return (
                         <div key={admin.id_login}>
                             <input name="inputAdmin" key={admin.id_login} value={admin.admins}></input>
-                            <button type="button" onClick={() => deleteAdmin(admin.id_login)}>Excluir</button>
+                            <button type="button" onClick={() => deleteAdmin(admin.id_login, username)}>Excluir</button>
                             <button type="button" onClick={() => console.log(admin.id_login)}>Alterar</button>
                         </div>
                     )
@@ -100,7 +103,7 @@ export default () => {
                         </Formik>
                     </div>
                     <div id="cardForm" className={ConfigUser["cardForm"]}>
-                        <h2>Lista de Usuários Administradores</h2>
+                        <h2>Lista de Administradores</h2>
                         {admins}
                     </div>
                     

@@ -32,11 +32,14 @@ export default () => {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
+                delete Axios.defaults.headers['Authorization']
+                Axios.defaults.headers['Authorization'] = 'Bearer ' + res.data.token
+                localStorage.removeItem("token")
                 localStorage.setItem('token', res.data.token)
-                Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
+                Axios.defaults.headers['Authorization'] = 'Bearer ' + res.data.token
                 setTimeout(function() {
                     setIsLoading(false)
-                    navigate("/dashboard")
+                    window.location.replace("/dashboard")
                 }, 1000)
             }).catch((err) => {
                 setIsLoading(false)

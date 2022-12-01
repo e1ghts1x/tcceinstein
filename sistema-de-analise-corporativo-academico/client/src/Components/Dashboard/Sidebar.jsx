@@ -55,9 +55,9 @@ export default function () {
             <div id="sidebar" className={sidebar["sidebar"]}>
                 <p className={sidebar["closebtn"]} onClick={closeNav}>&times;</p>
                 <img src={image} />
-                <a href="#" id="first" onClick={handleAnalysisClick}><FontAwesomeIcon icon={faChartSimple} /> Análise</a>
-                <a href="#" onClick={handleFormClick}><FontAwesomeIcon icon={faPenToSquare} /> Editar Formulário</a>
-                <a href="#" onClick={handleConfigClick}><FontAwesomeIcon icon={faGear} /> Configurações</a>
+                <a href="#analysis" id="first" onClick={handleAnalysisClick}><FontAwesomeIcon icon={faChartSimple} /> Análise</a>
+                <a href="#formedit" onClick={handleFormClick}><FontAwesomeIcon icon={faPenToSquare} /> Editar Formulário</a>
+                <a href="#config" onClick={handleConfigClick}><FontAwesomeIcon icon={faGear} /> Configurações</a>
             </div>
             <div id="main" className={sidebar["main"]}>
                 <button className={sidebar["openbtn"]} onClick={openNav}>&#9776;</button>

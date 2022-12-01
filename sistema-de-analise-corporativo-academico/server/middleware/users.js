@@ -24,7 +24,7 @@ module.exports = {
   isLoggedIn: (req, res, next) => {
     try {
       const tokenUser = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(tokenUser, process.env.JWT_TOKEN);
+      const decoded = jwt.verify(tokenUser, process.env.JWT_TOKEN_USER);
       req.userData = decoded;
       next();
     } catch (err) {
@@ -34,5 +34,4 @@ module.exports = {
     }
   },
 };
-
 

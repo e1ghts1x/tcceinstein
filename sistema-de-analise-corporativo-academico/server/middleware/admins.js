@@ -23,6 +23,7 @@ module.exports = {
       req.userData = decoded;
       next();
     } catch (err) {
+      console.log(err)
       return res.status(401).send({
         msg: "Sua sessão não é valida",
       });

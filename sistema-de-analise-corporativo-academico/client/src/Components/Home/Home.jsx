@@ -32,10 +32,12 @@ export default function () {
                 username: values.user,
                 password: values.password,
             }).then((res) => {
-                setIsLoading(false)
                 localStorage.setItem('token', res.data.token)
-                Axios.defaults.headers.common['Auth'] = 'Bearer' + res.data.token
-                navigate("/quest")
+                Axios.defaults.headers.common['Authorization'] = 'Bearer' + res.data.token
+                setTimeout(function() {
+                    setIsLoading(false)
+                    window.location.replace("/quest")
+                }, 1000)
             }).catch((err) =>{
                 setIsLoading(false)
                 setShowModal(true)

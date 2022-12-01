@@ -1,7 +1,7 @@
 const router = require("express").Router();
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
-const uuid = require("uuid");
+//const uuid = require("uuid"); -- CONFIGURAR
 const jwt = require("jsonwebtoken");
 
 const db = require("../lib/db.js");
@@ -54,14 +54,20 @@ router.post("/loginadmin", (req, res, next) => {
   );
 });
 
-router.get("/verifyadmin", adminMiddleware.isLoggedIn, (req,res,next) =>{
+router.get("/verifyadmin", adminMiddleware.isLoggedIn, (req, res) =>{ 
   return res.status(201).send({
     msg:"Usuário verificado!"
   })
-})
+});
+
+router.get("/verifyuser", userMiddleware.isLoggedIn, (req, res) =>{ 
+  return res.status(201).send({
+    msg:"Usuário verificado!"
+  })
+});
 
 router.post("/adminlogout", (req,res, next) =>{
-})
+});
 
 router.post("/login", (req, res, next) => {
   db.query(
@@ -265,7 +271,13 @@ router.post("/deleteadminuser", adminMiddleware.isLoggedIn, (req, res, next) => 
           return res.status(401).send({
             msg: "O usuário padrão não pode ser deletado...",
           });
-        } else {
+        }
+        if(result[0].admins === req.body.username){
+          return res.status(401).send({
+            msg: "O usuário atual está logado...",
+          });
+        }
+         else {
           db.query(
             `DELETE FROM admins WHERE id_login = ${req.body.id_login}`,
             (err, result) => {

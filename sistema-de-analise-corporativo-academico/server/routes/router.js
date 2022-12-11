@@ -4,8 +4,9 @@ const bcrypt = require("bcryptjs");
 //const uuid = require("uuid"); -- CONFIGURAR
 const jwt = require("jsonwebtoken");
 
+const {sendConfirmationEmail} = require("../lib/mailer")
 const db = require("../lib/db.js");
-const adminMiddleware = require("../middleware/admins.js");
+const adminMiddleware = require("../middleware/admins");
 const userMiddleware = require("../middleware/users");
 
 router.post("/loginadmin", (req, res, next) => {
@@ -116,25 +117,22 @@ router.post("/login", (req, res, next) => {
 
 router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
-    `SELECT * FROM login where LOWER(login) = LOWER(${db.escape(
-      req.body.username
-    )})`,
+    `SELECT * FROM login where LOWER(login) = LOWER(${db.escape(req.body.username)}) OR LOWER(${db.escape(req.body.email)})`,
     (err, result) => {
       if (result.length) {
         return res.status(409).send({
-          msg: "O nome de usuário não está disponível.",
+          msg: "O nome de usuário ou email não está disponível.",
         });
-      } else {
+      }else {
+        sendConfirmationEmail({toUser: req.body, hash: ""})
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).send({
               msg: err,
             });
-          } else {
+          }else {
             db.query(
-              `INSERT INTO login(login, email, senha) values (${db.escape(
-                req.body.username
-              )}, ${db.escape(req.body.email)}, ${db.escape(hash)})`,
+              `INSERT INTO login(login, email, senha) values (${db.escape(req.body.username)}, ${db.escape(req.body.email)}, ${db.escape(hash)})`,
               (err, result) => {
                 if (err) {
                   return res.status(400).send({

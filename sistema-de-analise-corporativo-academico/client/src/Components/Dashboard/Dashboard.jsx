@@ -25,10 +25,6 @@ export default () => {
         <div>
             <div className={Dashboard["dashboard"]}>
                 <div className={Dashboard["rightDash"]}>
-                    <div className={Dashboard["container"]}>
-                        <h4><FontAwesomeIcon icon={faUser} /> Usuário atual: {capitalizedUser}</h4>
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
                 </div>
                 <div className={Dashboard["leftDash"]}>
                     <Sidebar />

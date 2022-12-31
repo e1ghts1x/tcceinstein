@@ -30,7 +30,7 @@ export default () => {
         onSubmit: (values) => {
             setIsLoading(true)
             Axios.post(`${baseURL}/register`, {
-                username: values.user,
+                login: values.user,
                 email: values.email,
                 password: values.password,
             }).then((res) => {
@@ -74,6 +74,10 @@ export default () => {
                             <h2>Bem vindo ao nosso sistema de NPS</h2>
                             <h2>Registrar-se: </h2>
                             <input placeholder="Usuário" name="user" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.user} />
+                            {formik.touched.user && formik.errors.user ? (
+                                <div className="error-message">{formik.errors.user}</div>
+                            ) : null}
+                            <input placeholder="Nome Completo"/>
                             {formik.touched.user && formik.errors.user ? (
                                 <div className="error-message">{formik.errors.user}</div>
                             ) : null}

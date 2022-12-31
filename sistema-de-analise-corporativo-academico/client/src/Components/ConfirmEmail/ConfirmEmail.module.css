@@ -1,0 +1,60 @@
+:root {
+  --BackgroundHome: #201b2c;
+  --BackgroundCard: #2f2841;
+  --BackgorundInput: #514869;
+  --white: white;
+  --cinzaClaro: #e8e8e8;
+  --corDestaque: #a83832;
+}
+
+.ceBackground{
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--BackgroundHome);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ceCard{
+  width: 400px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  background: var(--BackgroundCard);
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px #00000056;
+  color: white;
+}
+
+.ceCard button{
+  width: 250px;
+  padding: 16px;
+  border: none;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 800;
+  letter-spacing: 3px;
+  color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.ceCard button:hover{
+    color: white;
+    background-color: var(--corDestaque);
+    transition: 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+  .ceCard{
+    width: 250px;
+    height: 200px;
+    font-size: 9pt;
+  }
+}

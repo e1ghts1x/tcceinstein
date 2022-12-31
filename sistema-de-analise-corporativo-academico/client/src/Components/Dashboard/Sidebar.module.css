@@ -1,133 +1,100 @@
-:root{
-    --sidebarBackgroundColor: #404040;
-    --white: white;
-    --cinzaClaro: #E8E8E8;
-    --corDestaque: #a83832;
-}
-
-.sidebar{
+.sidenav{
     height: 100%;
-    width: 250px;
+    width: 200px;
     position: fixed;
     z-index: 1;
-    background-color: var(--sidebarBackgroundColor);
     top: 0;
     left: 0;
-    padding-top: 70px;
-    transition: 0.5s;
+    background-color: var(--BackgroundCard);
+    overflow-x: hidden;
+    padding-top: 20px ;
 }
 
-.sidebar img{
-    width: 60%;
-    position: relative;
+.sidenav img{
+    width: 190px;
 }
 
-.sidebar a{
-    padding: 10px 10px 10px 32px;
-    text-decoration: none;
-    width: 80%;
-    float: right;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius:10px ;
-    font-size: 20px;
-    color: var(--white);
-    display: block;
-    transition: 0.5s;
-}
-
-.sidebar a:hover{
-    color: #a83832;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--corDestaque);
-    transition: 0.5s;
-}
-
-.sidebar a:active{
-    color: var(--corDestaque);
-    background-color: var(--white);
-    transition: 0.5s;
-    border-bottom: 1px solid var(--corDestaque);
-}
-
-.sidebar a:focus{
-    color: var(--corDestaque);
-    background-color: var(--white);
-    transition: 0.5s;
-    border-bottom: 1px solid var(--corDestaque);
-}
-
-.sidebar a:active{
-    color: var(--corDestaque);
-    background-color: var(--white);
-    transition: 0.5s;
-    border-bottom: 1px solid var(--corDestaque);
-}
-.main{
-    width: 50px;
-    height: 50px;
-}
-
-.openbtn{
-    margin: 10px;
-    width: 50px;
-    padding: 16px 0px;
-    border: none;
-    margin-bottom: 12px;
+.sidenav button{
+    background:none;
     outline: none;
-    text-transform: uppercase;
-    font-size: 800;
-    background-color: var(--sidebarBackgroundColor);
-    color: var(--white);
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
     cursor: pointer;
-    transition: 0.2s;
+    border: none;
 }
 
-.openbtn button{
-    margin-top: 10px;
+.cards{
+    margin: auto;
+    padding: 20px;
 }
 
-.openbtn:hover{
-    color: var(--corDestaque);
-    transition: 0.2s;
+.sidenav button:hover {
+    color: #f1f1f1;
 }
 
-.closebtn{
-    position: absolute;
-    color: white;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    transition: 0.2s;
+.sidenav button:focus{
+    color: #f1f1f1;
 }
 
-.closebtn:hover{
-    color: var(--corDestaque);
-    background-color: var(--sidebarBackgroundColor);
-    transition: 0.2s;
-    cursor: pointer;
+
+.main {
+    margin-left: 200px;
 }
 
-.logoutbtn{
+.navbarMain{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.logout{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.logout button{
     width: 100px;
-    margin-left: 10px;
     color: var(--white);
     background-color: #404040;
-    padding: 16px 0px;
+    margin-left: 15px;
     border: none;
     border-radius: 8px;
     outline: none;
-    font-size: 800;
     cursor: pointer;
     transition: 0.5s;
 }
 
-@media screen and (max-width: 800px) {
-    .sidebar {width: 140px;}
-    .sidebar a {font-size: 80%;}
-    .sidebar p {font-size: 30px;}
+.logout button:hover{
+    background-color: var(--corDestaque);
+    transition: 0.5s;
+}   
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {font-size: 18px;}
 }
 
-@media screen and (max-width: 600px){
-    .sidebar {width: 100px;}
+@media only screen and (max-width: 600px) {
+    .sidenav{
+        width: 50px;
+    }
+    .sidenav img{
+        width: 50px;
+    }
+    .sidenav button span {
+        display: none;
+    }
+    .sidenav button{
+        margin: 0px;
+    }
+    .main{
+        margin-left: 70px;
+    }
 }

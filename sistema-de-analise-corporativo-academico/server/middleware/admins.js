@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 
 module.exports = {
-  /*validateRegister: (req, res, next) => {
-    if (!req.body.username || req.body.username.length < 5) {
+  validateRegister: (req, res, next) => {
+    if (!req.body.admins || req.body.admins.length < 5) {
       return res.status(400).send({
         msg: "O usuário precisa ter 5 caracteres ou mais",
       });
@@ -14,7 +14,7 @@ module.exports = {
       });
     }
     next();
-  },*/
+  },
 
   isLoggedIn: (req, res, next) => {
     try {

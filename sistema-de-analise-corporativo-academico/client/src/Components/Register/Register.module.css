@@ -31,7 +31,7 @@
 
 .rightRegister {
   width: 80vw;
-  height: 70vh;
+  height: 500vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,6 +123,6 @@
   }
   .cardRegister {
     width: 500px;
-    height: 400px;
+    height: 600px;
   }
 }

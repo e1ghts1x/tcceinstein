@@ -65,6 +65,7 @@ export default () => {
                     return (
                         <div key={admin.id_login}>
                             <input name="inputAdmin" key={admin.id_login} value={admin.admins}></input>
+                            <input name="inputPass" key={admin.password} placeholder="********"></input>
                             <button type="button" onClick={() => deleteAdmin(admin.id_login, username)}>Excluir</button>
                             <button type="button" onClick={() => console.log(admin.id_login)}>Alterar</button>
                         </div>
@@ -84,6 +85,7 @@ export default () => {
 
     return (
         <div>
+            <Modal onClose={() => { { setShowModal(false) } }} show={showModal} titulo={titulo} body={body} />
             <div id="homeForm" className={ConfigUser["homeForm"]}>
                 <div id="leftForm" className={ConfigUser["leftForm"]}>
                     <div id="cardForm" className={ConfigUser["cardForm"]}>
@@ -109,7 +111,6 @@ export default () => {
                     
                 </div>
             </div>
-            <Modal onClose={() => { { setShowModal(false) } }} show={showModal} titulo={titulo} body={body} />
         </div>
     )
 }

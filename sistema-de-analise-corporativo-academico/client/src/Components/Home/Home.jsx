@@ -83,6 +83,7 @@ export default function () {
                     </Formik>
                     <button onClick={mostrarSenha}>Exibir Senha</button>
                     <a href="/register">Registrar-se</a>
+                    <a href="/email/resend">Reenviar email de verificação</a>
                 </div>
             </div>
         </div>

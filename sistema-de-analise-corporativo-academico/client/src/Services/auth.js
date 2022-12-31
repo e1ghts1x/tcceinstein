@@ -22,7 +22,6 @@ export const RequireAuth = (props) => {
             setPass(false)
             navigate(props.to)
         })
-
     }, [])
         
     return pass ? props.children : null

@@ -5,8 +5,9 @@ import ModalCss from "./Modal.module.css"
 const Modal = props => {
 
     const escapeClose = (e) => {
-        if((e.charCode || e.keyCode) === 27 || 10) {
+        if((e.charCode || e.keyCode) === 27) {
             props.onClose()
+            console.log("cu")
         }
     }
 

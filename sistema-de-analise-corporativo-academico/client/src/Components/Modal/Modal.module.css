@@ -64,3 +64,11 @@
     background-color: var(--corDestaque);
     transition: 0.5s;
 }   
+
+
+@media only screen and (max-width: 600px) {
+    .modalConteudo{
+        width: 300px
+    }
+}
+  

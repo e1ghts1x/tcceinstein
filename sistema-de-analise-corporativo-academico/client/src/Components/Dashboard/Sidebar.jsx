@@ -1,32 +1,36 @@
-import React, {useState} from "react";
-import FormEditor from "./FormEditor/FormEditor";
-import Analysis from "./Analysis/Analysis";
+import React from "react";
+import Sidebar from "./Sidebar.module.css"
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import jwtdecode from "jwt-decode";
+import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartSimple } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import sidebar from "./Sidebar.module.css"
-import image from "../../res/saci-white.png"
-import { useEffect } from "react";
+import Analysis from "./Analysis/Analysis";
+import FormEditor from "./FormEditor/FormEditor";
 import ConfigUser from "./ConfigUser/ConfigUser";
+import sacibanner from "../../res/saci-admin-white.png"
 
-export default function () {
+export default () => {
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [showAnalysis, setShowAnalysis] = useState(false);
+    const [showConfig, setShowConfig] = useState(false);
 
-    const [ showEditForm, setShowEditForm ] = useState(false);
-    const [ showAnalysis, setShowAnalysis ] = useState(false);
-    const [ showConfig, setShowConfig ] = useState(false);
+    const navigate = useNavigate()
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtdecode(token)
+    const User = decodedToken.username
+    const capitalizedUser = User.charAt(0).toUpperCase() + User.slice(1)
 
-    function openNav() {
-        document.getElementById("sidebar").style.display = "";
-        document.getElementById("homeForm").style.marginLeft = "5vh"
-        document.getElementById("homeForm").style.width = ""
-    } 
-
-    function closeNav() {
-        document.getElementById("sidebar").style.display = "none";
-        document.getElementById("homeForm").style.marginLeft = "0"
-        document.getElementById("homeForm").style.width = "80%"
-    } 
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        delete Axios.defaults.headers.common['Authorization']
+        navigate("/admin") //Aprimorar
+    }
 
     const handleFormClick = () => {
         setShowEditForm(true)
@@ -50,21 +54,28 @@ export default function () {
         handleAnalysisClick()
     }, [])
 
+
     return (
         <div>
-            <div id="sidebar" className={sidebar["sidebar"]}>
-                <p className={sidebar["closebtn"]} onClick={closeNav}>&times;</p>
-                <img src={image} />
-                <a href="#analysis" id="first" onClick={handleAnalysisClick}><FontAwesomeIcon icon={faChartSimple} /> Análise</a>
-                <a href="#formedit" onClick={handleFormClick}><FontAwesomeIcon icon={faPenToSquare} /> Editar Formulário</a>
-                <a href="#config" onClick={handleConfigClick}><FontAwesomeIcon icon={faGear} /> Configurações</a>
+            <div className={Sidebar["sidenav"]} id="sidenav">
+                <img src={sacibanner} />
+                <button onClick={handleAnalysisClick}><FontAwesomeIcon icon={faChartSimple} /><span> Análise</span></button>
+                <button onClick={handleFormClick}><FontAwesomeIcon icon={faPenToSquare} /><span> Editor</span></button>
+                <button onClick={handleConfigClick}><FontAwesomeIcon icon={faGear} /><span> Configurações</span></button>
             </div>
-            <div id="main" className={sidebar["main"]}>
-                <button className={sidebar["openbtn"]} onClick={openNav}>&#9776;</button>
+            <div className={Sidebar["main"]} id="main">
+                <div className={Sidebar["navbarMain"]}>
+                    <div className={Sidebar["logout"]}>
+                        <h4> Usuário atual: {capitalizedUser}</h4>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                </div>
+                <div className={Sidebar["cards"]}>
+                    {showAnalysis && <Analysis />}
+                    {showEditForm && <FormEditor />}
+                    {showConfig && <ConfigUser />}
+                </div>
             </div>
-            {showAnalysis && <Analysis/>}
-            {showEditForm && <FormEditor/>}
-            {showConfig && <ConfigUser/>}
         </div>
     )
 }

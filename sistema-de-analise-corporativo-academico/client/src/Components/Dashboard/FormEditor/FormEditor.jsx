@@ -108,6 +108,7 @@ export default () => {
 
     return (
         <div>
+            <Modal onClose={() => { { setShowModal(false) } }} show={showModal} titulo={titulo} body={body} />
             <div id="homeForm" className={FormEditor["homeForm"]}>
                 <div className={FormEditor["leftForm"]}>
                     <div className={FormEditor["cardForm"]}>
@@ -125,7 +126,6 @@ export default () => {
                     </div>
                 </div>
             </div>
-            <Modal onClose={() => { { setShowModal(false) } }} show={showModal} titulo={titulo} body={body} />
         </div>
     )
 }

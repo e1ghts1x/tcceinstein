@@ -57,17 +57,17 @@ router.post("/loginadmin", (req, res, next) => {
 
 router.get("/verifyadmin", adminMiddleware.isLoggedIn, (req, res) =>{ 
   return res.status(201).send({
-    msg:"Usuário verificado!"
+    msg:"Administrador verificado!"
   })
+});
+
+router.post("/adminlogout", (req,res, next) =>{
 });
 
 router.get("/verifyuser", userMiddleware.isLoggedIn, (req, res) =>{ 
   return res.status(201).send({
     msg:"Usuário verificado!"
   })
-});
-
-router.post("/adminlogout", (req,res, next) =>{
 });
 
 router.post("/login", (req, res, next) => {
@@ -83,6 +83,10 @@ router.post("/login", (req, res, next) => {
         return res.status(401).send({
           msg: "Usuário ou senha incorretos.",
         });
+      } if(result[0].verificacao == 0){
+        return res.status(401).send({
+          msg: "O usuário ainda não foi verificado.",
+        })
       }
       bcrypt.compare(req.body.password, result[0]["senha"], (bErr, bResult) => {
         if (bErr) {
@@ -117,14 +121,18 @@ router.post("/login", (req, res, next) => {
 
 router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
-    `SELECT * FROM login where LOWER(login) = LOWER(${db.escape(req.body.username)}) OR LOWER(${db.escape(req.body.email)})`,
+    `SELECT * FROM login where LOWER(login) = LOWER(${db.escape(req.body.login)}) OR LOWER(email) = (${db.escape(req.body.email)})`,
     (err, result) => {
+      if(err){
+        return res.status(400).send({
+          msg: err,
+        });
+      }
       if (result.length) {
         return res.status(409).send({
           msg: "O nome de usuário ou email não está disponível.",
         });
       }else {
-        sendConfirmationEmail({toUser: req.body, hash: ""})
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).send({
@@ -132,7 +140,7 @@ router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
             });
           }else {
             db.query(
-              `INSERT INTO login(login, email, senha) values (${db.escape(req.body.username)}, ${db.escape(req.body.email)}, ${db.escape(hash)})`,
+              `INSERT INTO login(login, email, senha, verificacao) VALUES (${db.escape(req.body.login)}, ${db.escape(req.body.email)}, ${db.escape(hash)}, FALSE)`,
               (err, result) => {
                 if (err) {
                   return res.status(400).send({
@@ -140,16 +148,127 @@ router.post("/register", userMiddleware.validateRegister, (req, res, next) => {
                   });
                 }
                 return res.status(201).send({
-                  msg: "Usuário registrado.",
+                  msg: "Usuário registrado. Para utilizá-lo, confirme o seu email.",
                 });
               }
             );
+            const token = jwt.sign(
+              {
+                username: req.body.login,
+                email: req.body.email,
+              },
+              process.env.JWT_TOKEN_EMAIL_CONFIRMATION,
+              {
+                expiresIn: process.env.JWT_EXPIRES_EMAIL_CONFIRMATION,
+              }
+            );
+            sendConfirmationEmail({toUser: req.body, hash: token})
           }
         });
       }
     }
   );
 });
+
+router.post("/confirmation/resend", (req, res, next) => {
+  db.query(`SELECT * FROM login WHERE email = ${db.escape(req.body.email)}`,
+  (err, result) =>{
+    if(err){
+      return res.status(400).send({
+        msg: err,
+      });
+    }if(!result.length){
+      return res.status(409).send({
+        msg: "Email não cadastrado.",
+      });
+    }else if(result[0].verificacao == 1){
+      return res.status(409).send({
+        msg: "Usuário já verificado.",
+      });
+    }
+    else{
+      const token = jwt.sign(
+        {
+          username: result[0].login,
+          email: result[0].email
+        },
+        process.env.JWT_TOKEN_EMAIL_CONFIRMATION,
+        {
+          expiresIn: process.env.JWT_EXPIRES_EMAIL_CONFIRMATION,
+        }
+      )
+      sendConfirmationEmail({toUser: result[0], hash: token})
+      return res.status(201).send({
+        msg: "Email enviado com sucesso.",
+      });
+    }
+  })
+})
+
+router.post("/confirmation/:token", (req, res, next) =>{
+  const token = req.params.token;
+  try{
+    const verifiedToken = jwt.verify(token, process.env.JWT_TOKEN_EMAIL_CONFIRMATION)
+    req.userData = verifiedToken
+    db.query(`UPDATE login SET verificacao = true where login = "${req.userData.username}"`,
+    (err, result) =>{
+      if(err){
+        return res.status(400).send({
+          msg: err
+        })
+      } else{
+        return res.status(201).send({
+          msg: "Usuário confirmado com sucesso!"
+        })
+      }
+    })
+  } catch(err){
+    return res.status(401).send({
+      msg: "Esse link não é válido."
+    })
+  }
+})
+
+router.post("/confirmation/forgotpassword/:token", (req, res, next) =>{
+  db.query(`SELECT * FROM login WHERE email = ${req.body.email}`,
+  (err, result) =>{
+    if(!result.length){
+      return res.status(400).send({
+        msg: "Usuário não encontrado na base de dados."
+      })
+    } else{
+      const token = req.params.token;
+      try{
+        const verifiedToken = jwt.verify(token, process.env.JWT_TOKEN_EMAIL_CONFIRMATION)
+        req.userData = verifiedToken
+        bcrypt.hash(req.body.password, 10, (err,hash) =>{
+          if(err){
+            return res.status(500).send({
+              msg: err,
+            });
+          } else{
+            db.query(`UPDATE login SET senha = "${db.escape(hash)}" where email = "${req.userData.email}"`,
+            (err, result) =>{
+              if(err){
+                return res.status(400).send({
+                  msg: err
+                })
+              }else{
+                return res.status(201).send({
+                  msg: "Senha Alterada com sucesso!"
+                })
+              }
+            })
+          }
+        })
+      } catch(err){
+        return res.status(401).send({
+          msg: "Esse link não é válido."
+        })
+      }
+    }
+  })
+})
 
 router.post("/deletequestion", adminMiddleware.isLoggedIn, (req, res) => {
   db.query(
@@ -295,7 +414,7 @@ router.post("/deleteadminuser", adminMiddleware.isLoggedIn, (req, res, next) => 
   }
 );
 
-router.post("/addadminuser", adminMiddleware.isLoggedIn, (req, res, next) => {
+router.post("/addadminuser", adminMiddleware.isLoggedIn, adminMiddleware.validateRegister, (req, res, next) => {
   db.query(
     `SELECT * FROM admins where LOWER(admins) = LOWER(${db.escape(
       req.body.admins
@@ -331,5 +450,9 @@ router.post("/addadminuser", adminMiddleware.isLoggedIn, (req, res, next) => {
     }
   );
 });
+
+router.post("/questions", userMiddleware.isLoggedIn, (req, res, next) =>{
+  db.query()
+})
 
 module.exports = router;

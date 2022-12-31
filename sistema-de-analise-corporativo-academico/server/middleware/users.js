@@ -3,7 +3,7 @@ require('dotenv').config()
 
 module.exports = {
   validateRegister: (req, res, next) => {
-    if (!req.body.username || req.body.username.length < 5) {
+    if (!req.body.login || req.body.login.length < 5) {
       return res.status(400).send({
         msg: "O usuário precisa ter 5 caracteres ou mais.",
       });
